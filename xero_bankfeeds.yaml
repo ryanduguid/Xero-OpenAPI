@@ -293,7 +293,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Statements"
+                $ref: "#/components/schemas/Error"
               example:
                 type: invalid-request
                 title: Invalid Request
@@ -330,7 +330,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Statements"
+                $ref: "#/components/schemas/Error"
               example:
                 type: invalid-request
                 title: Invalid Request
@@ -368,7 +368,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Statements"
+                $ref: "#/components/schemas/Error"
               example:
                 type: invalid-request
                 title: Request too large
@@ -379,7 +379,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Statements"
+                $ref: "#/components/schemas/Error"
               example:
                 type: invalid-end-balance
                 title: Invalid End Balance
@@ -390,7 +390,7 @@ paths:
           content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/Statements"
+                $ref: "#/components/schemas/Error"
               example:
                 type: internal-error
                 title: Intermittent Internal Xero Error
@@ -558,6 +558,7 @@ components:
           example: 079a88ea-276d-41fb-a1f1-366ef3e22921
           description: Xero identifier for a bank account in Xero. Must be included if AccountNumber is not specified.
         accountType:
+          type: string
           enum:
             - BANK
             - CREDITCARD
@@ -620,6 +621,7 @@ components:
           example: 87cb0dc8-fa32-409c-b622-19f8de8dcc83
           description: The Xero generated feed connection Id that identifies the Xero Bank Account Container into which the statement should be delivered. This is obtained by calling GET FeedConnections.
         status:
+          type: string
           enum:
             - PENDING
             - REJECTED

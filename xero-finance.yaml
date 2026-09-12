@@ -936,8 +936,8 @@ components:
             email: Grant read-only access to your email
             openid: Grant read-only access to your open id
             profile: your profile information
-            finance.statements.read: Grant read-only access to finacial statements
-            finance.cashvalidation.read: Grant read-only access to bank statement and reconcilation data
+            finance.statements.read: Grant read-only access to financial statements
+            finance.cashvalidation.read: Grant read-only access to bank statement and reconciliation data
             finance.bankstatementsplus.read: Grant read-only access to bank statements accounting data
   parameters:
     requiredHeader:

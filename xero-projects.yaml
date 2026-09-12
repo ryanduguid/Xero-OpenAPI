@@ -1476,7 +1476,7 @@ components:
         name:
           type: string
           description: Name of the task. Max length 100 characters.
-          maximum: 100
+          maxLength: 100
         rate:
           $ref: "#/components/schemas/Amount"
           type: number

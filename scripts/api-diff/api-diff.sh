@@ -36,7 +36,7 @@ detect_breaking_commit_marker() {
         return 0
     fi
 
-    if echo "$commits" | grep -Eiq 'BREAKING[ -]CHANGE:'; then
+    if echo "$commits" | grep -Eq '^BREAKING[ -]CHANGE:'; then
         return 0
     fi
 
@@ -102,7 +102,7 @@ if [ ! -f "xero_accounting.yaml" ]; then
 fi
 
 # Fetch master if not already done
-git fetch "${BASE_BRANCH%%/*}" "${BASE_BRANCH##*/}" 2>/dev/null || echo "Warning: Could not fetch ${BASE_BRANCH}"
+git fetch "${BASE_BRANCH%%/*}" "${BASE_BRANCH#*/}" 2>/dev/null || echo "Warning: Could not fetch ${BASE_BRANCH}"
 
 # Create temp directory for master branch files (outside repo to avoid overlap with /current mount)
 TEMP_DIR=$(mktemp -d)
@@ -185,10 +185,13 @@ for file in $files; do
 
     if [ $BREAKING_EXIT -eq 0 ]; then
         echo "✓ No breaking changes detected"
-    else
+    elif [ $BREAKING_EXIT -eq 1 ]; then
         echo "⚠ Breaking changes detected (exit code: $BREAKING_EXIT)"
         BREAKING_CHANGES_FOUND=true
         FILES_WITH_BREAKING_CHANGES+=("$file")
+    else
+        echo "API comparison failed for $file (exit code: $BREAKING_EXIT)" >&2
+        exit "$BREAKING_EXIT"
     fi
 
     PROCESSED_FILES=$((PROCESSED_FILES + 1))

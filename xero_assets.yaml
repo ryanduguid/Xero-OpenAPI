@@ -72,7 +72,7 @@ paths:
             enum:
               - asc
               - desc
-            example: ASC
+            example: asc
         - name: filterBy
           x-snake: filter_by
           in: query
@@ -279,7 +279,7 @@ paths:
                 depreciationStartDate: "2020-01-02"
                 costLimit: 100.0
                 currentAccumDepreciationAmount: 2.25
-              AccountingBookValue: 99.5
+              accountingBookValue: 99.5
         description: Fixed asset you are creating
   /Assets/{id}:
     parameters:
@@ -884,8 +884,6 @@ components:
           format: decimal
           description: (New Zealand Orgs Only) The Investment Boost deduction percentage.
     Setting:
-      required:
-        - name
       properties:
         assetNumberPrefix:
           type: string

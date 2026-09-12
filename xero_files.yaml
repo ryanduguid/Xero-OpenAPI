@@ -191,9 +191,6 @@ paths:
         "204":
           description: Successful deletion - return response 204 no content
           x-isEmpty: true
-  /Files/{FolderId}:
-    parameters:
-      - $ref: "#/components/parameters/requiredHeader"
     post:
       security:
         - OAuth2:
@@ -206,7 +203,7 @@ paths:
         - $ref: "#/components/parameters/idempotencyKey"
         - in: path
           x-snake: folder_id
-          name: FolderId
+          name: FileId
           required: true
           description: pass required folder id to save file to specific folder
           schema:
@@ -703,11 +700,6 @@ components:
             $ref: "#/components/schemas/FileObject"
     FileObject:
       type: object
-      required:
-        - id
-        - name
-        - manufacturer
-        - releaseDate
       properties:
         Name:
           description: File Name
@@ -793,7 +785,7 @@ components:
             $ref: "#/components/schemas/Folder"
     Folder:
       required:
-        - name
+        - Name
       properties:
         Name:
           description: The name of the folder

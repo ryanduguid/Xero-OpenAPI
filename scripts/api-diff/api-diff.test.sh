@@ -53,14 +53,17 @@ test_commit_messages() {
 echo "--- Commit messages that SHOULD allow breaking changes ---"
 test_commit_messages "feat!: remove deprecated endpoint" "allow-breaking-changes" "Header with ! marker"
 test_commit_messages "feat(api)!: remove deprecated endpoint" "allow-breaking-changes" "Header with scope and ! marker"
-test_commit_messages "feat: refactor API\n\nBREAKING CHANGE: response schema updated" "allow-breaking-changes" "BREAKING CHANGE footer"
-test_commit_messages "fix: patch bug\n\nSome details\nBREAKING CHANGE: removed old field" "allow-breaking-changes" "BREAKING CHANGE footer after body"
+test_commit_messages $'feat: refactor API\n\nBREAKING CHANGE: response schema updated' "allow-breaking-changes" "BREAKING CHANGE footer"
+test_commit_messages $'fix: patch bug\n\nSome details\nBREAKING CHANGE: removed old field' "allow-breaking-changes" "BREAKING CHANGE footer after body"
 
 echo "--- Commit messages that SHOULD fail on breaking changes ---"
 test_commit_messages "feat: add optional field" "block-breaking-changes" "Normal feature commit"
 test_commit_messages "fix: resolve null issue" "block-breaking-changes" "Normal fix commit"
 test_commit_messages "chore: update docs" "block-breaking-changes" "Chore commit"
 test_commit_messages "docs: mention breaking behaviour in description" "block-breaking-changes" "Contains word breaking but no marker"
+
+test_commit_messages $'fix: bug\n\nbreaking change: ordinary text' "block-breaking-changes" "Lowercase text is not a footer"
+test_commit_messages "docs: explain BREAKING CHANGE: syntax" "block-breaking-changes" "Inline text is not a footer"
 
 echo "--- Test override with --fail-on-breaking ---"
 # Test that --fail-on-breaking overrides commit message logic

@@ -5637,7 +5637,8 @@ components:
           format: date-time
           x-is-datetime: true
         niCategory:
-          $ref: "#/components/schemas/NICategoryLetter"
+          allOf:
+            - $ref: "#/components/schemas/NICategoryLetter"
           deprecated: true
         niCategories:
           description: The employee's NI categories
@@ -5687,7 +5688,8 @@ components:
           type: string
           example: 007
         niCategory:
-          $ref: "#/components/schemas/NICategoryLetter"
+          allOf:
+            - $ref: "#/components/schemas/NICategoryLetter"
           deprecated: true
         niCategories:
           description: The employee's NI categories
@@ -7545,7 +7547,6 @@ components:
       type: object
       required:
         - niCategory
-        - workplacePostcode
       properties:
         startDate:
           description: The start date of the NI category (YYYY-MM-DD)
@@ -7589,6 +7590,9 @@ components:
             niCategory:
               enum:
                 - V
+        - properties:
+            niCategory:
+              enum: [A, B, C, H, J, M, X, Z]
     EmploymentStatus:
       description: The employment status of the employee.
       type: string

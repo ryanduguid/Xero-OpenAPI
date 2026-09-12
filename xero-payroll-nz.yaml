@@ -6870,13 +6870,13 @@ components:
           format: double
           x-is-money: true
           example: 10.0
-        SickLeaveToAccrueAnnually:
+        sickLeaveToAccrueAnnually:
           description: Number of units accrued annually for sick leave. The type of units is determined by the property "TypeOfUnitsToAccrue" on the "Sick Leave" leave type
           type: number
           format: double
           x-is-money: true
           example: 100.5
-        SickLeaveMaximumToAccrue:
+        sickLeaveMaximumToAccrue:
           description: Maximum number of units accrued annually for sick leave. The type of units is determined by the property "TypeOfUnitsToAccrue" on the "Sick Leave" leave type
           type: number
           format: double
@@ -6888,17 +6888,17 @@ components:
           format: double
           x-is-money: true
           example: 10.5
-        SickLeaveScheduleOfAccrual:
+        sickLeaveScheduleOfAccrual:
           description: Set Schedule of Accrual Type for Sick Leave
           type: string
           example: OnAnniversaryDate
-        SickLeaveAnniversaryDate:
+        sickLeaveAnniversaryDate:
           description: If Sick Leave Schedule of Accrual is "OnAnniversaryDate", this is the date when entitled to Sick Leave. When null the Employee's start date is used as the anniversary date
           type: string
           format: date
           example: 2020-01-19
           x-is-date: true
-        AnnualLeaveAnniversaryDate:
+        annualLeaveAnniversaryDate:
           description: The first date the employee will accrue Annual Leave. When null the Employee's start date is used as the anniversary date
           type: string
           format: date

@@ -793,7 +793,8 @@ components:
           example: BadRequest
         status:
           description: The error status code
-          type: string
+          type: integer
+          format: int32
           example: 400
         detail:
           description: A description of the error
