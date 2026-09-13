@@ -281,6 +281,7 @@ components:
           description: If the subscription has been canceled, this is the date when the subscription ends. If null, the subscription is active and has not been cancelled
           format: date-time
           type: string
+          nullable: true
           x-is-datetime: true
         id:
           description: The unique identifier of the subscription
@@ -405,6 +406,7 @@ components:
         quantity:
           description: The quantity of the item. For a fixed product, it is 1. For a per-seat product, it is a positive integer. For metered products, it is always null.
           type: integer
+          nullable: true
         startDate:
           description: |
             Date the subscription started, or will start. Note: this could be in

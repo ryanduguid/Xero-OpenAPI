@@ -25,6 +25,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollAuV2
@@ -242,6 +243,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollAuV2

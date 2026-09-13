@@ -22,6 +22,7 @@ paths:
       security:
         - OAuth2:
             - assets
+        - OAuth2:
             - assets.read
       tags:
         - Asset
@@ -288,6 +289,7 @@ paths:
       security:
         - OAuth2:
             - assets
+        - OAuth2:
             - assets.read
       tags:
         - Asset
@@ -353,6 +355,7 @@ paths:
       security:
         - OAuth2:
             - assets
+        - OAuth2:
             - assets.read
       tags:
         - Asset
@@ -561,12 +564,13 @@ paths:
       security:
         - OAuth2:
             - assets
+        - OAuth2:
             - assets.read
       tags:
         - Asset
       summary: searches fixed asset settings
       operationId: getAssetSettings
-      description: By passing in the appropriate options, you can search for available fixed asset types in the system
+      description: By passing in the appropriate options, you can retrieve the organisation's fixed asset settings
       responses:
         "200":
           description: search results matching criteria
@@ -687,8 +691,9 @@ components:
           $ref: "#/components/schemas/AssetStatus"
         warrantyExpiryDate:
           type: string
+          format: date
           description: The date the asset’s warranty expires (if needed) YYYY-MM-DD
-          example: ca4c6b39-4f4f-43e8-98da-5e1f350a6694
+          example: "2020-01-02"
         serialNumber:
           type: string
           description: The asset's serial number

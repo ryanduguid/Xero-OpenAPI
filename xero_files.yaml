@@ -22,6 +22,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -37,7 +38,7 @@ paths:
             example: 50
         - in: query
           name: page
-          description: number of records to skip for pagination
+          description: page number to retrieve, starting at 1. Use pagesize to set the number of records per page
           schema:
             type: integer
             minimum: 1
@@ -68,7 +69,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Files"
-              example: '{ "TotalCount": 100, "Page": 1, "PerPage": 2, "Items": [ { "Name": "helo-heros.jpg", "MimeType": "application/jpg", "Size": 2878711, "CreatedDateUtc": "2021-02-10T16:02:54.9930000", "UpdatedDateUtc": "2021-02-10T16:02:54.9930000", "User": { "Name": "sid.maestre@xero.com", "FirstName": "Sidney", "LastName": "Maestre", "FullName": "Sidney Maestre", "Id": "740add2a-a703-4b8a-a670-1093919c2040" }, "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3", "Id": "3d413bfe-f40f-4807-b953-9a42f834ff15" }, { "Name": "helo-heros.jpg", "MimeType": "application/jpg", "Size": 2878711, "CreatedDateUtc": "2021-02-09T21:16:00.6130000", "UpdatedDateUtc": "2021-02-09T21:16:00.6130000", "User": { "Name": "sid.maestre@xero.com", "FirstName": "Sidney", "LastName": "Maestre", "FullName": "Sidney Maestre", "Id": "740add2a-a703-4b8a-a670-1093919c2040" }, "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3", "Id": "22f87409-cdfd-4813-a868-559481bcb052" } ] }'
+              example:
+                TotalCount: 100
+                Page: 1
+                PerPage: 2
+                Items:
+                - Name: helo-heros.jpg
+                  MimeType: application/jpg
+                  Size: 2878711
+                  CreatedDateUtc: "2021-02-10T16:02:54.9930000"
+                  UpdatedDateUtc: "2021-02-10T16:02:54.9930000"
+                  User:
+                    Name: sid.maestre@xero.com
+                    FirstName: Sidney
+                    LastName: Maestre
+                    FullName: Sidney Maestre
+                    Id: 740add2a-a703-4b8a-a670-1093919c2040
+                  FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                  Id: 3d413bfe-f40f-4807-b953-9a42f834ff15
+                - Name: helo-heros.jpg
+                  MimeType: application/jpg
+                  Size: 2878711
+                  CreatedDateUtc: "2021-02-09T21:16:00.6130000"
+                  UpdatedDateUtc: "2021-02-09T21:16:00.6130000"
+                  User:
+                    Name: sid.maestre@xero.com
+                    FirstName: Sidney
+                    LastName: Maestre
+                    FullName: Sidney Maestre
+                    Id: 740add2a-a703-4b8a-a670-1093919c2040
+                  FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                  Id: 22f87409-cdfd-4813-a868-559481bcb052
     post:
       security:
         - OAuth2:
@@ -86,12 +117,28 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FileObject"
-              example: '{ "Name": "helo-heros.jpg", "MimeType": "application/jpg", "Size": 2878711, "CreatedDateUtc": "2021-02-10T23:17:50.1930000", "UpdatedDateUtc": "2021-02-10T23:17:50.1930000", "User": { "Name": "sid.maestre@xero.com", "FirstName": "Sidney", "LastName": "Maestre", "FullName": "Sidney Maestre", "Id": "740add2a-a703-4b8a-a670-1093919c2040" }, "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3", "Id": "22f87409-cdfd-4813-a868-559481bcb052" }'
+              example:
+                Name: helo-heros.jpg
+                MimeType: application/jpg
+                Size: 2878711
+                CreatedDateUtc: "2021-02-10T23:17:50.1930000"
+                UpdatedDateUtc: "2021-02-10T23:17:50.1930000"
+                User:
+                  Name: sid.maestre@xero.com
+                  FirstName: Sidney
+                  LastName: Maestre
+                  FullName: Sidney Maestre
+                  Id: 740add2a-a703-4b8a-a670-1093919c2040
+                FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                Id: 22f87409-cdfd-4813-a868-559481bcb052
         "400":
           description: invalid input, object invalid
           content:
             application/json:
-              example: '[ { "type":"Validation", "title":"Validation failure", "detail":"Extension: boo is not a valid File extension." } ]'
+              example:
+                - type: Validation
+                  title: Validation failure
+                  detail: "Extension: boo is not a valid File extension."
       requestBody:
         required: true
         content:
@@ -105,6 +152,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -127,7 +175,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FileObject"
-              example: '{ "Name": "helo-heros.jpg", "MimeType": "application/jpg", "Size": 2878711, "CreatedDateUtc": "2021-02-10T23:17:50.1930000", "UpdatedDateUtc": "2021-02-10T23:17:50.1930000", "User": { "Name": "sid.maestre@xero.com", "FirstName": "Sidney", "LastName": "Maestre", "FullName": "Sidney Maestre", "Id": "740add2a-a703-4b8a-a670-1093919c2040" }, "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3", "Id": "efd77bfc-7018-4da1-b251-7aa2d438382c" }'
+              example:
+                Name: helo-heros.jpg
+                MimeType: application/jpg
+                Size: 2878711
+                CreatedDateUtc: "2021-02-10T23:17:50.1930000"
+                UpdatedDateUtc: "2021-02-10T23:17:50.1930000"
+                User:
+                  Name: sid.maestre@xero.com
+                  FirstName: Sidney
+                  LastName: Maestre
+                  FullName: Sidney Maestre
+                  Id: 740add2a-a703-4b8a-a670-1093919c2040
+                FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                Id: efd77bfc-7018-4da1-b251-7aa2d438382c
     put:
       security:
         - OAuth2:
@@ -155,19 +216,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FileObject"
-              example: '{ "Name": "helo-heros.jpg", "MimeType": "application/jpg", "Size": 2878711, "CreatedDateUtc": "2021-02-10T23:17:50.1930000", "UpdatedDateUtc": "2021-02-10T23:58:54.1000000", "User": { "Name": "sid.maestre@xero.com", "FirstName": "Sidney", "LastName": "Maestre", "FullName": "Sidney Maestre", "Id": "740add2a-a703-4b8a-a670-1093919c2040" }, "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3", "Id": "efd77bfc-7018-4da1-b251-7aa2d438382c" }'
+              example:
+                Name: helo-heros.jpg
+                MimeType: application/jpg
+                Size: 2878711
+                CreatedDateUtc: "2021-02-10T23:17:50.1930000"
+                UpdatedDateUtc: "2021-02-10T23:58:54.1000000"
+                User:
+                  Name: sid.maestre@xero.com
+                  FirstName: Sidney
+                  LastName: Maestre
+                  FullName: Sidney Maestre
+                  Id: 740add2a-a703-4b8a-a670-1093919c2040
+                FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                Id: efd77bfc-7018-4da1-b251-7aa2d438382c
         "400":
           description: invalid input, object invalid
           content:
             application/json:
-              example: '[ { "type":"Rename", "title":"Rename failed", "detail":"Unable to rename efd77bfc-7018-4da1-b251-7aa2d438382c to FooBar" } ]'
+              example:
+                - type: Rename
+                  title: Rename failed
+                  detail: Unable to rename efd77bfc-7018-4da1-b251-7aa2d438382c to FooBar
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/FileObject"
-            example: '{ "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3" }'
+            example:
+              FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
     delete:
       security:
         - OAuth2:
@@ -217,12 +295,28 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FileObject"
-              example: '{ "Name": "helo-heros.jpg", "MimeType": "application/jpg", "Size": 2878711, "CreatedDateUtc": "2021-02-10T23:17:50.1930000", "UpdatedDateUtc": "2021-02-10T23:17:50.1930000", "User": { "Name": "sid.maestre@xero.com", "FirstName": "Sidney", "LastName": "Maestre", "FullName": "Sidney Maestre", "Id": "740add2a-a703-4b8a-a670-1093919c2040" }, "FolderId": "bf924975-7097-46f2-a143-1ecfbab3c8c3", "Id": "22f87409-cdfd-4813-a868-559481bcb052" }'
+              example:
+                Name: helo-heros.jpg
+                MimeType: application/jpg
+                Size: 2878711
+                CreatedDateUtc: "2021-02-10T23:17:50.1930000"
+                UpdatedDateUtc: "2021-02-10T23:17:50.1930000"
+                User:
+                  Name: sid.maestre@xero.com
+                  FirstName: Sidney
+                  LastName: Maestre
+                  FullName: Sidney Maestre
+                  Id: 740add2a-a703-4b8a-a670-1093919c2040
+                FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                Id: 22f87409-cdfd-4813-a868-559481bcb052
         "400":
           description: invalid input, object invalid
           content:
             application/json:
-              example: '[ { "type":"Validation", "title":"Validation failure", "detail":"Extension: boo is not a valid File extension." } ]'
+              example:
+                - type: Validation
+                  title: Validation failure
+                  detail: "Extension: boo is not a valid File extension."
       requestBody:
         required: true
         content:
@@ -236,6 +330,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -267,6 +362,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -292,7 +388,11 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Association"
-              example: '[ { "FileId":"6beccb4a-0d7d-4518-93f3-e0cd1dccb254", "ObjectId":"1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectType":"Business", "ObjectGroup":"Contact" } ]'
+              example:
+                - FileId: 6beccb4a-0d7d-4518-93f3-e0cd1dccb254
+                  ObjectId: 1270bf7c-5d18-473a-9231-1e36c4bd33ed
+                  ObjectType: Business
+                  ObjectGroup: Contact
     post:
       security:
         - OAuth2:
@@ -301,7 +401,7 @@ paths:
         - Files
       summary: Creates a new file association
       operationId: createFileAssociation
-      description: By passing in the appropriate options, you can create a new folder
+      description: By passing in the appropriate options, you can associate a file with an object
       parameters:
         - $ref: "#/components/parameters/idempotencyKey"
         - name: FileId
@@ -320,19 +420,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Association"
-              example: '{ "FileId": "6beccb4a-0d7d-4518-93f3-e0cd1dccb254", "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectType": "Business", "ObjectGroup": "Contact" }'
+              example:
+                FileId: 6beccb4a-0d7d-4518-93f3-e0cd1dccb254
+                ObjectId: 1270bf7c-5d18-473a-9231-1e36c4bd33ed
+                ObjectType: Business
+                ObjectGroup: Contact
         "400":
           description: invalid input, object invalid
           content:
             application/json:
-              example: '[ { "type":"Validation", "title":"Validation failure", "detail":"Object is not a Account" } ]'
+              example:
+                - type: Validation
+                  title: Validation failure
+                  detail: Object is not a Account
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Association"
-            example: '{ "ObjectId": "1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectGroup": "Contact", "ObjectType": "Business" }'
+            example:
+              ObjectId: 1270bf7c-5d18-473a-9231-1e36c4bd33ed
+              ObjectGroup: Contact
+              ObjectType: Business
   /Files/{FileId}/Associations/{ObjectId}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -344,7 +454,7 @@ paths:
         - Files
       summary: Deletes an existing file association
       operationId: deleteFileAssociation
-      description: By passing in the appropriate options, you can create a new folder
+      description: By passing in the appropriate options, you can delete an association between a file and an object
       parameters:
         - name: FileId
           x-snake: file_id
@@ -375,6 +485,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -400,7 +511,7 @@ paths:
             example: 50
         - in: query
           name: page
-          description: number of records to skip for pagination
+          description: page number to retrieve, starting at 1. Use pagesize to set the number of records per page
           schema:
             type: integer
             minimum: 1
@@ -435,7 +546,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Association"
-              example: '[ { "SendWithObject":false, "Name":"testfile.pdf", "Size":12357, "CreatedDateUtc":"2020-12-10T01:22:00.0000000", "AssociationDateUtc":"2020-12-10T01:22:00.0000000", "FileId":"6beccb4a-0d7d-4518-93f3-e0cd1dccb254", "ObjectId":"1270bf7c-5d18-473a-9231-1e36c4bd33ed", "ObjectType":"Business", "ObjectGroup":"Contact" } ]'
+              example:
+                - SendWithObject: false
+                  Name: testfile.pdf
+                  Size: 12357
+                  CreatedDateUtc: "2020-12-10T01:22:00.0000000"
+                  AssociationDateUtc: "2020-12-10T01:22:00.0000000"
+                  FileId: 6beccb4a-0d7d-4518-93f3-e0cd1dccb254
+                  ObjectId: 1270bf7c-5d18-473a-9231-1e36c4bd33ed
+                  ObjectType: Business
+                  ObjectGroup: Contact
   /Associations/Count:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -443,6 +563,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -467,7 +588,10 @@ paths:
             application/json:
               schema:
                 type: object
-                example: '{ "19d4fc59-e799-410f-912b-03d4ab294d73": 2, "82195976-5175-45d4-926e-807ff10892e7": 1, "a8547af2-2900-4879-98b8-f1a780c78feb": 0}'
+                example:
+                  19d4fc59-e799-410f-912b-03d4ab294d73: 2
+                  82195976-5175-45d4-926e-807ff10892e7: 1
+                  a8547af2-2900-4879-98b8-f1a780c78feb: 0
   /Folders:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -475,6 +599,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -501,7 +626,16 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Folder"
-              example: '[ { "Name":"Inbox", "FileCount":14, "Email":"xero.inbox.jpf4.6oo29retajkhtfus@xerofiles.com", "IsInbox":true, "Id":"bf924975-7097-46f2-a143-1ecfbab3c8c3" }, { "Name":"Contracts", "FileCount":7, "IsInbox":false, "Id":"554ff1ad-4b94-4266-9b45-e29bcb75e6bf" } ]'
+              example:
+                - Name: Inbox
+                  FileCount: 14
+                  Email: xero.inbox.jpf4.6oo29retajkhtfus@xerofiles.com
+                  IsInbox: true
+                  Id: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                - Name: Contracts
+                  FileCount: 7
+                  IsInbox: false
+                  Id: 554ff1ad-4b94-4266-9b45-e29bcb75e6bf
     post:
       security:
         - OAuth2:
@@ -520,19 +654,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Folder"
-              example: '{ "Name": "My Docs", "FileCount": 0, "IsInbox": false, "Id": "913970ad-8c8e-4666-8294-35b9cac23206" }'
+              example:
+                Name: My Docs
+                FileCount: 0
+                IsInbox: false
+                Id: 913970ad-8c8e-4666-8294-35b9cac23206
         "400":
           description: invalid input, object invalid
           content:
             application/json:
-              example: '[ { "type":"Validation", "title":"Validation failure", "detail":"Name contains one or more bad characters" } ]'
+              example:
+                - type: Validation
+                  title: Validation failure
+                  detail: Name contains one or more bad characters
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Folder"
-            example: '{ "Name": "My Docs" }'
+            example:
+              Name: My Docs
   /Folders/{FolderId}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -540,6 +682,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -563,7 +706,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Folder"
-              example: '{ "Name": "My Docs", "FileCount": 0, "IsInbox": false, "Id": "4c5f3fe4-2516-4863-ac88-3029351773bf" }'
+              example:
+                Name: My Docs
+                FileCount: 0
+                IsInbox: false
+                Id: 4c5f3fe4-2516-4863-ac88-3029351773bf
     put:
       security:
         - OAuth2:
@@ -591,19 +738,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Folder"
-              example: '{ "Name": "Your Docs", "FileCount": 0, "IsInbox": false, "Id": "4c5f3fe4-2516-4863-ac88-3029351773bf" }'
+              example:
+                Name: Your Docs
+                FileCount: 0
+                IsInbox: false
+                Id: 4c5f3fe4-2516-4863-ac88-3029351773bf
         "400":
           description: invalid input, object invalid
           content:
             application/json:
-              example: '[ { "type":"Validation", "title":"Validation failure", "detail":"Name contains one or more bad characters" } ]'
+              example:
+                - type: Validation
+                  title: Validation failure
+                  detail: Name contains one or more bad characters
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Folder"
-            example: '{ "Name": "Your Docs" }'
+            example:
+              Name: Your Docs
     delete:
       security:
         - OAuth2:
@@ -634,6 +789,7 @@ paths:
       security:
         - OAuth2:
             - files
+        - OAuth2:
             - files.read
       tags:
         - Files
@@ -647,7 +803,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Folder"
-              example: '{ "Name": "Inbox", "FileCount": 14, "Email": "xero.inbox.jpf4.6oo29retajkhtfus@xerofiles.com", "IsInbox": true, "Id": "bf924975-7097-46f2-a143-1ecfbab3c8c3" }'
+              example:
+                Name: Inbox
+                FileCount: 14
+                Email: xero.inbox.jpf4.6oo29retajkhtfus@xerofiles.com
+                IsInbox: true
+                Id: bf924975-7097-46f2-a143-1ecfbab3c8c3
 components:
   securitySchemes:
     OAuth2:
@@ -772,9 +933,9 @@ components:
           type: string
           example: Smith
         FullName:
-          description: Last name of user
+          description: Full name of user
           type: string
-          example: Smith
+          example: John Smith
       type: object
     Folders:
       type: object

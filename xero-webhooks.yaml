@@ -274,14 +274,14 @@ components:
           description: A list of events that have occurred
         lastEventSequence:
           type: integer
-          minimum: 1
+          minimum: 0
           maximum: 2147483647
-          description: The sequence number of the last event in the list
+          description: The sequence number of the last event in the list. The intent to receive validation payload has an empty event list and sends zero
         firstEventSequence:
           type: integer
-          minimum: 1
+          minimum: 0
           maximum: 2147483647
-          description: The sequence number of the first event in the list
+          description: The sequence number of the first event in the list. The intent to receive validation payload has an empty event list and sends zero
         entropy:
           type: string
           description: A random string used for security or validation purposes

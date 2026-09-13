@@ -25,6 +25,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollAu
@@ -241,8 +242,32 @@ paths:
             schema:
               type: array
               items:
-                $ref: "#/components/schemas/Employee"
-            example: '[ { "FirstName": "Albus", "LastName": "Dumbledore", "DateOfBirth": "/Date(321523200000+0000)/", "HomeAddress": { "AddressLine1": "101 Green St", "City": "Island Bay", "Region": "NSW", "PostalCode": "6023", "Country": "AUSTRALIA" }, "StartDate": "/Date(321523200000+0000)/", "MiddleNames": "Percival", "Email": "albus39608@hogwarts.edu", "Gender": "M", "Phone": "444-2323", "Mobile": "555-1212", "IsAuthorisedToApproveLeave": true, "IsAuthorisedToApproveTimesheets": true, "JobTitle": "Regional Manager", "Classification": "corporate", "OrdinaryEarningsRateID": "ab874dfb-ab09-4c91-954e-43acf6fc23b4", "Status": "ACTIVE" } ]'
+                allOf:
+                  - $ref: "#/components/schemas/Employee"
+                  - required:
+                      - HomeAddress
+            example:
+              - FirstName: Albus
+                LastName: Dumbledore
+                DateOfBirth: /Date(321523200000+0000)/
+                HomeAddress:
+                  AddressLine1: 101 Green St
+                  City: Island Bay
+                  Region: NSW
+                  PostalCode: "6023"
+                  Country: AUSTRALIA
+                StartDate: /Date(321523200000+0000)/
+                MiddleNames: Percival
+                Email: albus39608@hogwarts.edu
+                Gender: M
+                Phone: 444-2323
+                Mobile: 555-1212
+                IsAuthorisedToApproveLeave: true
+                IsAuthorisedToApproveTimesheets: true
+                JobTitle: Regional Manager
+                Classification: corporate
+                OrdinaryEarningsRateID: ab874dfb-ab09-4c91-954e-43acf6fc23b4
+                Status: ACTIVE
   /Employees/{EmployeeID}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -250,6 +275,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollAu
@@ -503,7 +529,11 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/Employee"
-            example: '[ { "MiddleNames": "Frank" } ]'
+            example:
+              - FirstName: Jack
+                LastName: Sparrow
+                DateOfBirth: "1975-05-05"
+                MiddleNames: Frank
   /LeaveApplications:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -511,6 +541,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollAu
@@ -743,7 +774,12 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/LeaveApplication"
-            example: '[ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "Title": "Hello World", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/" } ]'
+            example:
+              - EmployeeID: cdfb8371-0b21-4b8a-8903-1024df6c391e
+                LeaveTypeID: 184ea8f7-d143-46dd-bef3-0c60e1aa6fca
+                Title: Hello World
+                StartDate: /Date(1572559200000+0000)/
+                EndDate: /Date(1572645600000+0000)/
   /LeaveApplications/v2:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -751,6 +787,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollAu
@@ -882,6 +919,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollAu
@@ -1053,7 +1091,20 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/LeaveApplication"
-            example: '[ { "EmployeeID": "cdfb8371-0b21-4b8a-8903-1024df6c391e", "LeaveApplicationID": "1d4cd583-0107-4386-936b-672eb3d1f624", "LeaveTypeID": "184ea8f7-d143-46dd-bef3-0c60e1aa6fca", "LeavePeriods": [ { "PayPeriodStartDate": "/Date(1572566400000+0000)/", "PayPeriodEndDate": "/Date(1573084800000+0000)/", "LeavePeriodStatus": "SCHEDULED", "NumberOfUnits": 7.6 } ], "Title": "vacation", "Description": "My updated Description", "StartDate": "/Date(1572559200000+0000)/", "EndDate": "/Date(1572645600000+0000)/", "PayOutType": "DEFAULT" } ]'
+            example:
+              - EmployeeID: cdfb8371-0b21-4b8a-8903-1024df6c391e
+                LeaveApplicationID: 1d4cd583-0107-4386-936b-672eb3d1f624
+                LeaveTypeID: 184ea8f7-d143-46dd-bef3-0c60e1aa6fca
+                LeavePeriods:
+                - PayPeriodStartDate: /Date(1572566400000+0000)/
+                  PayPeriodEndDate: /Date(1573084800000+0000)/
+                  LeavePeriodStatus: SCHEDULED
+                  NumberOfUnits: 7.6
+                Title: vacation
+                Description: My updated Description
+                StartDate: /Date(1572559200000+0000)/
+                EndDate: /Date(1572645600000+0000)/
+                PayOutType: DEFAULT
   /LeaveApplications/{LeaveApplicationID}/approve:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -1169,6 +1220,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollAu
@@ -1591,7 +1643,7 @@ paths:
           is_last: true
       responses:
         "200":
-          description: A successful request - currently returns empty array for JSON
+          description: A successful request
           content:
             application/json:
               schema:
@@ -1662,7 +1714,7 @@ paths:
                   IsExemptFromTax: false
                   IsExemptFromSuper: true
                   IsReportableAsW1: false
-                  IsQualifyingEarnings: true
+                  IsQualifyingEarnings: false
                   AllowanceContributesToAnnualLeaveRate: false
                   AllowanceContributesToOvertimeRate: false
                   EarningsType: ORDINARYTIMEEARNINGS
@@ -1679,6 +1731,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollAu
@@ -1780,8 +1833,8 @@ paths:
           java: LocalDate.of(2020, Month.OCTOBER, 30)
           csharp: new DateTime(2020, 10, 30)
           php: new DateTime('2020-10-30')
-          node: "'2000-10-30'"
-          python: dateutil.parser.parse('2000-10-30T00:00:00Z')
+          node: "'2020-10-30'"
+          python: dateutil.parser.parse('2020-10-30T00:00:00Z')
           ruby: "'YYYY-MM-DD'"
         - payrollCalendar:
           is_object: true
@@ -1875,7 +1928,11 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/PayrollCalendar"
-            example: '[ { "PayrollCalendarID":"78bb86b9-e1ea-47ac-b75d-f087a81931de", "PayRunPeriodStartDate":"/Date(1572566400000+0000)/", "PayRunPeriodEndDate":"/Date(1573084800000+0000)/", "PayRunStatus":"DRAFT", "PaymentDate":"/Date(1573171200000+0000)/" } ]'
+            example:
+              - Name: Weekly Calendar
+                CalendarType: WEEKLY
+                StartDate: /Date(1572998400000+0000)/
+                PaymentDate: /Date(1573516800000+0000)/
   /PayrollCalendars/{PayrollCalendarID}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -1883,6 +1940,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollAu
@@ -1931,6 +1989,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payruns
+        - OAuth2:
             - payroll.payruns.read
       tags:
         - PayrollAu
@@ -2047,9 +2106,15 @@ paths:
           application/json:
             schema:
               type: array
+              maxItems: 1
               items:
                 $ref: "#/components/schemas/PayRun"
-            example: '[ { "PayrollCalendarID": "78bb86b9-e1ea-47ac-b75d-f087a81931de", "PayRunPeriodStartDate": "/Date(1572566400000+0000)/", "PayRunPeriodEndDate": "/Date(1573084800000+0000)/", "PayRunStatus": "DRAFT", "PaymentDate": "/Date(1573171200000+0000)/" } ]'
+            example:
+              - PayrollCalendarID: 78bb86b9-e1ea-47ac-b75d-f087a81931de
+                PayRunPeriodStartDate: /Date(1572566400000+0000)/
+                PayRunPeriodEndDate: /Date(1573084800000+0000)/
+                PayRunStatus: DRAFT
+                PaymentDate: /Date(1573171200000+0000)/
   /PayRuns/{PayRunID}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -2057,6 +2122,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payruns
+        - OAuth2:
             - payroll.payruns.read
       tags:
         - PayrollAu
@@ -2184,7 +2250,9 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/PayRun"
-              example: '[ { "PayRunStatus": "POSTED" } ]'
+              example:
+                - PayrollCalendarID: 5cf0a07d-9d1e-4a5a-9e6c-6dab3c1d5cbf
+                  PayRunStatus: POSTED
   /Payslip/{PayslipID}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -2192,6 +2260,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payslip
+        - OAuth2:
             - payroll.payslip.read
       tags:
         - PayrollAu
@@ -2371,7 +2440,7 @@ paths:
             example: 4ff1e5cc-9835-40d5-bb18-09fdb118db9c
       responses:
         "200":
-          description: A successful request - currently returns empty array for JSON
+          description: A successful request
           content:
             application/json:
               schema:
@@ -2403,9 +2472,7 @@ paths:
               items:
                 $ref: "#/components/schemas/PayslipLines"
             example:
-              Payslip:
-                EmployeeID: cdfb8371-0b21-4b8a-8903-1024df6c391e
-                DeductionLines:
+              - DeductionLines:
                   - DeductionTypeID: 727af5e8-b347-4ae7-85fc-9b82266d0aec
                     CalculationType: FIXEDAMOUNT
                     NumberOfUnits: 10
@@ -2416,6 +2483,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollAu
@@ -2466,7 +2534,7 @@ paths:
                     TimesheetCategories:
                       TrackingCategoryID: 89375aed-ed51-4624-9e5d-92db6bfa8974
                       TrackingCategoryName: Foo32551
-                  DaysInPayrollYear: "364"
+                  DaysInPayrollYear: 364
                   EmployeesAreSTP2: false
   /Superfunds:
     parameters:
@@ -2475,6 +2543,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollAu
@@ -2603,7 +2672,13 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/SuperFund"
-            example: '[ { "usi":"PTC0133AU", "Type":"REGULATED", "Name":"Bar99359", "AccountNumber":"FB36350", "AccountName":"Foo38428", "USI":"PTC0133AU" } ]'
+            example:
+              - usi: PTC0133AU
+                Type: REGULATED
+                Name: Bar99359
+                AccountNumber: FB36350
+                AccountName: Foo38428
+                USI: PTC0133AU
   /Superfunds/{SuperFundID}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -2611,6 +2686,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollAu
@@ -2722,7 +2798,9 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/SuperFund"
-            example: ' [ { "Type":"REGULATED", "Name":"Nice23534" } ]'
+            example:
+              - Type: REGULATED
+                Name: Nice23534
   /SuperfundProducts:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -2730,6 +2808,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollAu
@@ -2741,7 +2820,7 @@ paths:
           description: The ABN of the Regulated SuperFund
           schema:
             type: string
-          example: 40022701955
+          example: "40022701955"
         - in: query
           name: USI
           description: The USI of the Regulated SuperFund
@@ -2777,6 +2856,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollAu
@@ -2991,7 +3071,22 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/Timesheet"
-            example: '[ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f968767118bc", "StartDate":"/Date(1573171200000+0000)/", "EndDate":"/Date(1573689600000+0000)/", "Status":"DRAFT", "TimesheetLines":[ { "EarningsRateID":"ab874dfb-ab09-4c91-954e-43acf6fc23b4", "TrackingItemID":"af5e9ce2-2349-4136-be99-3561b189f473", "NumberOfUnits":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ] } ] } ]'
+            example:
+              - EmployeeID: b34e89ff-770d-4099-b7e5-f968767118bc
+                StartDate: /Date(1573171200000+0000)/
+                EndDate: /Date(1573689600000+0000)/
+                Status: DRAFT
+                TimesheetLines:
+                - EarningsRateID: ab874dfb-ab09-4c91-954e-43acf6fc23b4
+                  TrackingItemID: af5e9ce2-2349-4136-be99-3561b189f473
+                  NumberOfUnits:
+                  - 2.0
+                  - 10.0
+                  - 0.0
+                  - 0.0
+                  - 5.0
+                  - 0.0
+                  - 5.0
   /Timesheets/{TimesheetID}:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -2999,6 +3094,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollAu
@@ -3180,7 +3276,25 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/Timesheet"
-            example: '[ { "EmployeeID":"b34e89ff-770d-4099-b7e5-f968767118bc", "StartDate":"/Date(1573171200000+0000)/", "EndDate":"/Date(1573689600000+0000)/", "Status":"APPROVED", "Hours":22.0, "TimesheetID":"a7eb0a79-8511-4ee7-b473-3a25f28abcb9", "TimesheetLines":[ { "EarningsRateID":"ab874dfb-ab09-4c91-954e-43acf6fc23b4", "TrackingItemID":"af5e9ce2-2349-4136-be99-3561b189f473", "NumberOfUnits":[ 2.0, 10.0, 0.0, 0.0, 5.0, 0.0, 5.0 ], "UpdatedDateUTC":"/Date(1573516185127+0000)/" } ] } ]'
+            example:
+              - EmployeeID: b34e89ff-770d-4099-b7e5-f968767118bc
+                StartDate: /Date(1573171200000+0000)/
+                EndDate: /Date(1573689600000+0000)/
+                Status: APPROVED
+                Hours: 22.0
+                TimesheetID: a7eb0a79-8511-4ee7-b473-3a25f28abcb9
+                TimesheetLines:
+                - EarningsRateID: ab874dfb-ab09-4c91-954e-43acf6fc23b4
+                  TrackingItemID: af5e9ce2-2349-4136-be99-3561b189f473
+                  NumberOfUnits:
+                  - 2.0
+                  - 10.0
+                  - 0.0
+                  - 0.0
+                  - 5.0
+                  - 0.0
+                  - 5.0
+                  UpdatedDateUTC: /Date(1573516185127+0000)/
 components:
   securitySchemes:
     OAuth2:
@@ -3305,12 +3419,12 @@ components:
         Classification:
           description: Employees classification
           type: string
-          example: 99383
+          example: "99383"
         OrdinaryEarningsRateID:
           description: Xero unique identifier for earnings rate
           type: string
           format: uuid
-          example: 5gj1e5cc-9835-40d5-bb18-09fdb118db9c
+          example: 5cf1e5cc-9835-40d5-bb18-09fdb118db9c
         PayrollCalendarID:
           description: Xero unique identifier for payroll calendar for the employee
           type: string
@@ -3402,7 +3516,7 @@ components:
       type: object
       properties:
         LeaveApplicationID:
-          description: The Xero identifier for Payroll Employee
+          description: The Xero identifier for a leave application
           type: string
           format: uuid
           example: e0eb6747-7c17-4075-b804-989f8d4e5d39
@@ -3664,7 +3778,7 @@ components:
         - PayrollCalendarID
       properties:
         PayrollCalendarID:
-          description: Xero identifier for pay run
+          description: Xero identifier for the payroll calendar of the pay run
           type: string
           format: uuid
           example: bfac31bd-ea62-4fc8-a5e7-7965d9504b15
@@ -3995,11 +4109,11 @@ components:
         ExpenseAccountCode:
           description: Superannuation expense account code.
           type: string
-          example: 450
+          example: "450"
         LiabilityAccountCode:
           description: Superannuation liability account code
           type: string
-          example: 650
+          example: "650"
         PaymentDateForThisPeriod:
           description: Superannuation payment date for the current period (YYYY-MM-DD)
           type: string
@@ -4043,7 +4157,7 @@ components:
         LiabilityAccount:
           description: The tax line liability account code. For posted pay run you should be able to see liability account code
           type: string
-          example: 620
+          example: "620"
     LeaveEarningsLine:
       type: object
       properties:
@@ -4143,15 +4257,15 @@ components:
         ABN:
           description: ABN of the self managed super fund
           type: string
-          example: 40022701955
+          example: "40022701955"
         BSB:
           description: BSB of the self managed super fund
           type: string
-          example: 234324
+          example: "234324"
         AccountNumber:
           description: The account number for the self managed super fund.
           type: string
-          example: 234234234
+          example: "234234234"
         AccountName:
           description: The account name for the self managed super fund.
           type: string
@@ -4159,19 +4273,19 @@ components:
         ElectronicServiceAddress:
           description: The electronic service address for the self managed super fund.
           type: string
-          example: 12345678
+          example: "12345678"
         EmployerNumber:
           description: Some funds assign a unique number to each employer
           type: string
-          example: 324324
+          example: "324324"
         SPIN:
           description: The SPIN of the Regulated SuperFund. This field has been deprecated. It will only be present for legacy superfunds. New superfunds will not have a SPIN value. The USI field should be used instead of SPIN.
           type: string
-          example: 4545445454
+          example: "4545445454"
         USI:
           description: The USI of the Regulated SuperFund
           type: string
-          example: 40022701955001
+          example: "40022701955001"
         UpdatedDateUTC:
           description: Last modified timestamp
           type: string
@@ -4197,11 +4311,11 @@ components:
         ABN:
           description: The ABN of the Regulated SuperFund
           type: string
-          example: 839182848805
+          example: "839182848805"
         USI:
           description: The USI of the Regulated SuperFund
           type: string
-          example: 839182848805001
+          example: "839182848805001"
         SPIN:
           description: The SPIN of the Regulated SuperFund. This field has been deprecated. New superfunds will not have a SPIN value. The USI field should be used instead of SPIN
           type: string
@@ -4223,7 +4337,7 @@ components:
         Code:
           description: Customer defined account code
           type: string
-          example: 420
+          example: "420"
         Name:
           description: Name of account
           type: string
@@ -4241,7 +4355,7 @@ components:
         AccountCode:
           description: See Accounts
           type: string
-          example: 720
+          example: "720"
         TypeOfUnits:
           description: Type of units used to record earnings (max length = 50). Only When RateType is RATEPERUNIT
           type: string
@@ -4320,14 +4434,14 @@ components:
       type: object
       properties:
         Name:
-          description: Name of the earnings rate (max length = 100)
+          description: Name of the deduction type (max length = 50)
           type: string
           example: PTO
-          maxLength: 100
+          maxLength: 50
         AccountCode:
           description: See Accounts
           type: string
-          example: 720
+          example: "720"
         ReducesTax:
           description: Indicates that this is a pre-tax deduction that will reduce the amount of tax you withhold from an employee.
           type: boolean
@@ -4367,10 +4481,10 @@ components:
         - IsQualifyingEarnings
       properties:
         Name:
-          description: Name of the earnings rate (max length = 100)
+          description: Name of the leave type (max length = 50)
           type: string
           example: PTO
-          maxLength: 100
+          maxLength: 50
         TypeOfUnits:
           description: The type of units by which leave entitlements are normally tracked. These are typically the same as the type of units used for the employee’s ordinary earnings rate
           type: string
@@ -4418,18 +4532,19 @@ components:
           description: Boolean to determine if the leave type is considered as qualifying earnings for superannuation guarantee calculations
           type: boolean
           example: true
+          readOnly: true
     ReimbursementType:
       type: object
       properties:
         Name:
-          description: Name of the earnings rate (max length = 100)
+          description: Name of the reimbursement type (max length = 50)
           type: string
           example: PTO
-          maxLength: 100
+          maxLength: 50
         AccountCode:
           description: See Accounts
           type: string
-          example: 720
+          example: "720"
         ReimbursementTypeID:
           description: Xero identifier
           type: string
@@ -4466,7 +4581,7 @@ components:
         PostalCode:
           description: PostCode for employee home address
           type: string
-          example: 3182
+          example: "3182"
         Country:
           description: Country of HomeAddress
           type: string
@@ -4475,10 +4590,10 @@ components:
     TaxDeclaration:
       properties:
         EmployeeID:
-          description: Address line 1 for employee home address
+          description: The Xero identifier for Payroll Employee
           type: string
           format: uuid
-          example: 123 Main St
+          example: 4729cf8d-d1e5-4f6c-8b57-0d3d17a1d7a4
         EmploymentBasis:
           $ref: "#/components/schemas/EmploymentBasis"
         TFNExemptionType:
@@ -4486,11 +4601,11 @@ components:
         TaxFileNumber:
           description: The tax file number e.g 123123123.
           type: string
-          example: 123123123
+          example: "123123123"
         ABN:
           description: 11-digit Australian Business Number e.g 21006819692 or an empty string ("") to unset a previously set value. Only applicable, and mandatory if income type is NONEMPLOYEE.
           type: string
-          example: 21006819692
+          example: "21006819692"
         AustralianResidentForTaxPurposes:
           description: If the employee is Australian resident for tax purposes. e.g true or false
           type: boolean
@@ -4571,11 +4686,11 @@ components:
         BSB:
           description: The BSB number of the account
           type: string
-          example: 122344
+          example: "122344"
         AccountNumber:
           description: The account number
           type: string
-          example: 345678
+          example: "345678"
         Remainder:
           description: If this account is the Remaining bank account
           type: boolean
@@ -4714,11 +4829,11 @@ components:
         ExpenseAccountCode:
           description: expense account code
           type: string
-          example: 478
+          example: "478"
         LiabilityAccountCode:
           description: liabilty account code
           type: string
-          example: 826
+          example: "826"
         Percentage:
           description: percentage for super line
           type: number
@@ -4762,7 +4877,7 @@ components:
         ExpenseAccount:
           description: Reimbursement expense account. For posted pay run you should be able to see expense account code.
           type: string
-          example: 420
+          example: "420"
     LeaveLines:
       type: object
       x-objectArrayKey: employee
@@ -4774,8 +4889,6 @@ components:
             $ref: "#/components/schemas/LeaveLine"
     LeaveLine:
       type: object
-      required:
-        - IsQualifyingEarnings
       properties:
         LeaveTypeID:
           description: Xero leave type identifier
@@ -4789,12 +4902,13 @@ components:
         EmploymentTerminationPaymentType:
           $ref: "#/components/schemas/EmploymentTerminationPaymentType"
         IncludeSuperannuationGuaranteeContribution:
-          description: amount of leave line
+          description: Whether the leave line is included in the superannuation guarantee contribution calculation
           type: boolean
           example: true
         IsQualifyingEarnings:
-          description: Boolean to determine if the leave line is considered as qualifying earnings for superannuation guarantee calculations
+          description: Boolean to determine if the leave line is considered as qualifying earnings for superannuation guarantee calculations. Defaults to false when omitted
           type: boolean
+          default: false
           example: true
         NumberOfUnits:
           description: Number of units for leave line.
@@ -4872,7 +4986,7 @@ components:
         Tax:
           description: Opening Balance tax
           type: string
-          example: 4333d5cd-53a5-4c31-98e5-a8b4e5676b0b
+          example: "1000.00"
         EarningsLines:
           type: array
           items:
@@ -5425,7 +5539,7 @@ components:
         EmployeeNumber:
           description: The membership number assigned to the employee by the super fund.
           type: string
-          example: 1234
+          example: "1234"
     AccountType:
       description: See Account Types
       type: string

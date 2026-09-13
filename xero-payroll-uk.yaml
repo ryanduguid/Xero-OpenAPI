@@ -21,6 +21,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -60,6 +61,7 @@ paths:
                 problem: null
                 employees:
                   - employeeID: aad6b292-7b94-408b-93f6-e489867e3fb0
+                    title: Mr
                     firstName: Jack
                     lastName: Allan
                     dateOfBirth: 1987-12-23T00:00:00Z
@@ -79,6 +81,7 @@ paths:
                     isOffPayrollWorker: false
                     contracts: []
                   - employeeID: 67e545d4-e8a6-4f98-9f63-85c2383dfe12
+                    title: Ms
                     firstName: Charlotte
                     lastName: Danes
                     dateOfBirth: 1993-10-24T00:00:00Z
@@ -104,6 +107,7 @@ paths:
                         startDate: 2020-02-03T00:00:00
                         fixedTermEndDate: null
                   - employeeID: eb4a0c3b-b0d6-440d-bccc-348b7dc92321
+                    title: Ms
                     firstName: Chelsea
                     lastName: Serati
                     dateOfBirth: 1976-02-16T00:00:00Z
@@ -306,6 +310,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -644,7 +649,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Employment"
+              $ref: "#/components/schemas/EmploymentCreate"
             example:
               payrollCalendarID: cdfb8371-0b21-4b8a-8903-1024df6c391e
               startDate: "2024-04-01"
@@ -660,6 +665,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -709,6 +715,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -955,6 +962,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -1129,6 +1137,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -1368,6 +1377,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -1418,6 +1428,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -1473,6 +1484,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -1667,6 +1679,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -1725,6 +1738,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -1791,6 +1805,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -1865,7 +1880,7 @@ paths:
           php: XeroAPI\XeroPHP\Models\PayrollUk\EmployeeLeaveType\ScheduleOfAccrualEnum.BeginningOfCalendarYear
           node: EmployeeLeaveType.ScheduleOfAccrualEnum.BeginningOfCalendarYear
           ruby: XeroRuby::PayrollUk::EmployeeLeaveType::schedule_of_accrual::BEGINNINGOFCALENDARYEAR
-          python: schedule_of_accrual::BEGINNINGOFCALENDARYEAR
+          python: schedule_of_accrual.BEGINNINGOFCALENDARYEAR
           java: com.xero.models.payrolluk.EmployeeLeaveType.ScheduleOfAccrualEnum.BeginningOfCalendarYear
           csharp: EmployeeLeaveType.ScheduleOfAccrualEnum.BeginningOfCalendarYear
           object: employeeLeaveType
@@ -1941,6 +1956,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -2105,6 +2121,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -2562,7 +2579,13 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EarningsTemplates"
-            example: '[ { "ratePerUnit":20.0, "numberOfUnits":8.0, "earningsRateID":"87f5b43a-cf51-4b74-92de-94c819e82d27" }, { "ratePerUnit":20.0, "numberOfUnits":8.0, "earningsRateID":"973365f3-66b2-4c33-8ae6-14b75f78f68b" } ]'
+            example:
+              - ratePerUnit: 20.0
+                numberOfUnits: 8.0
+                earningsRateID: 87f5b43a-cf51-4b74-92de-94c819e82d27
+              - ratePerUnit: 20.0
+                numberOfUnits: 8.0
+                earningsRateID: 973365f3-66b2-4c33-8ae6-14b75f78f68b
   /Benefits:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -2570,6 +2593,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -2716,6 +2740,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -2766,6 +2791,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -2858,7 +2884,7 @@ paths:
           php: XeroAPI\XeroPHP\Models\PayrollUk\Deduction\DeductionCategoryEnum.StakeholderPension
           node: Deduction.DeductionCategoryEnum.StakeholderPension
           ruby: XeroRuby::PayrollUk::Deduction::deduction_category_enum::STAKEHOLDERPENSION
-          python: deduction_category_enum::STAKEHOLDERPENSION
+          python: deduction_category_enum.STAKEHOLDERPENSION
           java: com.xero.models.payrolluk.Deduction.DeductionCategoryEnum.StakeholderPension
           csharp: Deduction.DeductionCategoryEnum.StakeholderPension
           object: deduction
@@ -2878,7 +2904,7 @@ paths:
           php: XeroAPI\XeroPHP\Models\PayrolUk\Deduction\CalculationTypeEnum.PercentageOfGross
           node: Deduction.CalculationTypeEnum.PercentageOfGross
           ruby: XeroRuby::PayrollUk::Deduction::calculation_type_enum::PERCENTAGEOFGROSS
-          python: calculation_type_enum::PERCENTAGEOFGROSS
+          python: calculation_type_enum.PERCENTAGEOFGROSS
           java: com.xero.models.payrolluk.Deduction.CalculationTypeEnum.PercentageOfGross
           csharp: Deduction.CalculationTypeEnum.PercentageOfGross
           object: deduction
@@ -2941,6 +2967,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3043,6 +3070,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3121,6 +3149,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3162,6 +3191,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3239,7 +3269,7 @@ paths:
           php: XeroAPI\XeroPHP\Models\PayrollUk\EarningsRate\EarningsTypeEnum.RegularEarnings
           node: EarningsRate.EarningsTypeEnum.RegularEarnings
           ruby: XeroRuby::PayrollUk::EarningsRate::earnings_type_enum::REGULAREARNINGS
-          python: earnings_type_enum::REGULAREARNINGS
+          python: earnings_type_enum.REGULAREARNINGS
           java: com.xero.models.payrolluk.EarningsRate.EarningsTypeEnum.RegularEarnings
           csharp: EarningsRate.EarningsTypeEnum.RegularEarnings
           object: earningsRate
@@ -3320,6 +3350,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3367,6 +3398,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3501,6 +3533,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3545,6 +3578,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3656,6 +3690,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -3697,6 +3732,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollUk
@@ -3914,6 +3950,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollUk
@@ -3986,7 +4023,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TimesheetLine"
+                $ref: "#/components/schemas/TimesheetLineObject"
         "400":
           description: validation error for a bad request
           content:
@@ -4400,7 +4437,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TimesheetLine"
+                $ref: "#/components/schemas/TimesheetLineObject"
         "400":
           description: validation error for a bad request
           content:
@@ -4414,6 +4451,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -4591,6 +4629,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -4635,6 +4674,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -4809,7 +4849,7 @@ paths:
               numberOfUnitsPerDay: 2
               effectiveFrom: "2020-05-01"
               annualSalary: 100
-              status: ACTIVE
+              status: Active
               paymentType: Salary
   /Employees/{EmployeeID}/SalaryAndWages/{SalaryAndWagesID}:
     parameters:
@@ -4818,6 +4858,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollUk
@@ -4838,7 +4879,7 @@ paths:
           x-snake: salary_and_wages_id
           in: path
           required: true
-          description: Id for single pay template earnings object
+          description: Id for single salary and wages object
           schema:
             type: string
             format: uuid
@@ -4849,7 +4890,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SalaryAndWages"
+                $ref: "#/components/schemas/SalaryAndWageObject"
               example:
                 id: cd4f35e7-5062-494a-96c4-f81e9083b0b9
                 providerName: provider-name
@@ -4857,17 +4898,17 @@ paths:
                 httpStatusCode: OK
                 pagination: null
                 problem: null
-                salaryAndWages:
-                  - salaryAndWagesID: 49c33012-c1ac-456c-91fd-cb7e6db6f5fe
-                    earningsRateID: 87f5b43a-cf51-4b74-92de-94c819e82d27
-                    numberOfUnitsPerWeek: 40
-                    ratePerUnit: null
-                    numberOfUnitsPerDay: null
-                    daysPerWeek: null
-                    effectiveFrom: 2020-04-01T00:00:00
-                    annualSalary: 25000
-                    status: Active
-                    paymentType: Salary
+                salaryAndWage:
+                  salaryAndWagesID: 49c33012-c1ac-456c-91fd-cb7e6db6f5fe
+                  earningsRateID: 87f5b43a-cf51-4b74-92de-94c819e82d27
+                  numberOfUnitsPerWeek: 40
+                  ratePerUnit: null
+                  numberOfUnitsPerDay: null
+                  daysPerWeek: null
+                  effectiveFrom: 2020-04-01T00:00:00
+                  annualSalary: 25000
+                  status: Active
+                  paymentType: Salary
     put:
       security:
         - OAuth2:
@@ -4946,7 +4987,7 @@ paths:
           x-snake: salary_and_wages_id
           in: path
           required: true
-          description: Id for single pay template earnings object
+          description: Id for single salary and wages object
           schema:
             type: string
             format: uuid
@@ -4994,7 +5035,7 @@ paths:
               ratePerUnit: 11
               effectiveFrom: "2020-05-15"
               annualSalary: 101
-              status: ACTIVE
+              status: Active
               paymentType: Salary
     delete:
       security:
@@ -5033,6 +5074,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payruns
+        - OAuth2:
             - payroll.payruns.read
       tags:
         - PayrollUk
@@ -5047,7 +5089,7 @@ paths:
             type: integer
         - in: query
           name: status
-          description: By default get payruns will return all the payruns for an organization. You can add GET https://api.xero.com/payroll.xro/2.0/payRuns?statu={PayRunStatus} to filter the payruns by status.
+          description: By default get payruns will return all the payruns for an organization. You can add GET https://api.xero.com/payroll.xro/2.0/payRuns?status={PayRunStatus} to filter the payruns by status.
           schema:
             type: string
             enum:
@@ -5103,6 +5145,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payruns
+        - OAuth2:
             - payroll.payruns.read
       tags:
         - PayrollUk
@@ -5138,8 +5181,8 @@ paths:
                   periodStartDate: 2020-02-03T00:00:00
                   periodEndDate: 2020-02-09T00:00:00
                   paymentDate: 2020-02-10T00:00:00
-                  totalCost: 490.39
-                  totalPay: 376.92
+                  totalCost: 534.38
+                  totalPay: 384.3
                   payRunStatus: Draft
                   payRunType: Scheduled
                   calendarType: Weekly
@@ -5152,9 +5195,9 @@ paths:
                       lastName: Johnpitragibigson
                       totalEarnings: 480.77
                       grossEarnings: 480.77
-                      totalPay: 386.54
-                      totalEmployerTaxes: 0
-                      totalEmployeeTaxes: 94.23
+                      totalPay: 384.3
+                      totalEmployerTaxes: 43.99
+                      totalEmployeeTaxes: 86.85
                       totalDeductions: 9.62
                       totalReimbursements: 0
                       totalCourtOrders: 0
@@ -5170,6 +5213,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payslip
+        - OAuth2:
             - payroll.payslip.read
       tags:
         - PayrollUk
@@ -5217,9 +5261,9 @@ paths:
                     lastName: Johnpitragibigson
                     totalEarnings: 480.77
                     grossEarnings: 480.77
-                    totalPay: 386.54
-                    totalEmployerTaxes: 0
-                    totalEmployeeTaxes: 94.23
+                    totalPay: 384.3
+                    totalEmployerTaxes: 43.99
+                    totalEmployeeTaxes: 86.85
                     totalDeductions: 9.62
                     totalReimbursements: 0
                     totalCourtOrders: 0
@@ -5254,18 +5298,18 @@ paths:
                       - taxLineID: e7dc717a-4399-4702-9e15-adb87e568dc9
                         description: PAYE
                         amount: 48.6
-                        globalTaxTypeID: 1
+                        globalTaxTypeID: "1"
                         manualAdjustment: false
                       - taxLineID: c774af0b-4776-4c81-9c96-ad18e4b35f40
                         description: Employee National Insurance Contribution
                         amount: 38.25
-                        globalTaxTypeID: 2
+                        globalTaxTypeID: "2"
                         manualAdjustment: false
                     employerTaxLines:
                       - taxLineID: 8de7a488-57ed-4d58-b76a-d9f9460ebded
                         description: Employer National Insurance Contribution
                         amount: 43.99
-                        globalTaxTypeID: 3
+                        globalTaxTypeID: "3"
                         manualAdjustment: false
                     courtOrderLines: []
   /Payslips/{PayslipID}:
@@ -5275,6 +5319,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payslip
+        - OAuth2:
             - payroll.payslip.read
       tags:
         - PayrollUk
@@ -5313,9 +5358,9 @@ paths:
                   lastName: Johnpitragibigson
                   totalEarnings: 480.77
                   grossEarnings: 480.77
-                  totalPay: 386.54
-                  totalEmployerTaxes: 0
-                  totalEmployeeTaxes: 94.23
+                  totalPay: 384.3
+                  totalEmployerTaxes: 43.99
+                  totalEmployeeTaxes: 86.85
                   totalDeductions: 9.62
                   totalReimbursements: 0
                   totalCourtOrders: 0
@@ -5350,18 +5395,18 @@ paths:
                     - taxLineID: e7dc717a-4399-4702-9e15-adb87e568dc9
                       description: PAYE
                       amount: 48.6
-                      globalTaxTypeID: 1
+                      globalTaxTypeID: "1"
                       manualAdjustment: false
                     - taxLineID: c774af0b-4776-4c81-9c96-ad18e4b35f40
                       description: Employee National Insurance Contribution
                       amount: 38.25
-                      globalTaxTypeID: 2
+                      globalTaxTypeID: "2"
                       manualAdjustment: false
                   employerTaxLines:
                     - taxLineID: 8de7a488-57ed-4d58-b76a-d9f9460ebded
                       description: Employer National Insurance Contribution
                       amount: 43.99
-                      globalTaxTypeID: 3
+                      globalTaxTypeID: "3"
                       manualAdjustment: false
                   courtOrderLines: []
   /Settings:
@@ -5371,6 +5416,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -5428,6 +5474,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollUk
@@ -5518,7 +5565,7 @@ components:
         status:
           description: The error status code
           type: string
-          example: 400
+          example: "400"
         detail:
           description: A description of the error
           type: string
@@ -5666,6 +5713,57 @@ components:
           $ref: "#/components/schemas/Problem"
         employment:
           $ref: "#/components/schemas/Employment"
+    EmploymentCreate:
+      description: Employment record as supplied on creation. Unspecified statuses and contract types are reserved for records Xero generates, and a fixed term contract must carry its end date
+      allOf:
+        - $ref: "#/components/schemas/Employment"
+        - type: object
+          properties:
+            contracts:
+              type: array
+              items:
+                $ref: "#/components/schemas/ContractsCreate"
+    ContractsCreate:
+      description: Contract as supplied on creation
+      allOf:
+        - $ref: "#/components/schemas/Contracts"
+        - type: object
+          properties:
+            employmentStatus:
+              type: string
+              enum:
+                - Employee
+                - Worker
+            contractType:
+              type: string
+              enum:
+                - FullTime
+                - PartTime
+                - ZeroHour
+            developmentalRoleDetails:
+              $ref: "#/components/schemas/DevelopmentalRoleDetailsCreate"
+          anyOf:
+            - not:
+                type: object
+                required:
+                  - isFixedTerm
+                properties:
+                  isFixedTerm:
+                    enum:
+                      - true
+            - type: object
+              required:
+                - fixedTermEndDate
+    DevelopmentalRoleDetailsCreate:
+      description: Developmental role as supplied on creation
+      allOf:
+        - $ref: "#/components/schemas/DevelopmentalRoleDetails"
+        - type: object
+          properties:
+            developmentalRole:
+              type: string
+              enum:
+                - Apprentice
     Employment:
       type: object
       required:
@@ -5686,7 +5784,7 @@ components:
         employeeNumber:
           description: The employment number of the employee
           type: string
-          example: 007
+          example: "007"
         niCategory:
           allOf:
             - $ref: "#/components/schemas/NICategoryLetter"
@@ -5827,7 +5925,7 @@ components:
         - endDate
       properties:
         leaveID:
-          description: The Xero identifier for LeaveType
+          description: The Xero identifier for the employee leave record
           type: string
           format: uuid
         leaveTypeID:
@@ -6065,7 +6163,7 @@ components:
           type: string
           example: Sick
         status:
-          description: the type of statutory leave
+          description: the status of the statutory leave
           type: string
           example: Pending
         workPattern:
@@ -6224,7 +6322,7 @@ components:
           format: double
           x-is-money: true
         numberOfUnits:
-          description: The rate per unit
+          description: The number of units
           type: number
           format: double
           x-is-money: true
@@ -6268,7 +6366,21 @@ components:
         - liabilityAccountId
         - expenseAccountId
         - calculationType
-        - percentage
+      anyOf:
+        - description: A percentage of gross calculation requires its percentage
+          required:
+            - percentage
+          properties:
+            calculationType:
+              enum:
+                - PercentageOfGross
+        - description: A fixed amount calculation requires its standard amount
+          required:
+            - standardAmount
+          properties:
+            calculationType:
+              enum:
+                - FixedAmount
       properties:
         id:
           description: unique identifier in Xero
@@ -6486,7 +6598,7 @@ components:
         - name
       properties:
         id:
-          description: Xero unique identifier for an earning rate
+          description: Xero unique identifier for an earnings order
           type: string
           format: uuid
         name:
@@ -7046,8 +7158,8 @@ components:
         postedDateTime:
           description: Posted date time of the pay run
           type: string
-          format: date
-          x-is-date: true
+          format: date-time
+          x-is-datetime: true
         paySlips:
           type: array
           items:
@@ -7090,7 +7202,7 @@ components:
         lastEdited:
           description: The date payslip was last updated
           type: string
-          format: date
+          format: date-time
           x-is-datetime: true
         firstName:
           description: Employee first name
@@ -7633,7 +7745,7 @@ components:
           description: The developmental role type - "Apprentice" is the only supported role currently
           type: string
           example: Apprentice
-        publicKey:
+        developmentalRolePublicKey:
           description: The public key of the developmental role. Public key is required if the intention is to edit an existing developmental role. If no key is supplied a new developmental role will be created
           type: string
           format: uuid
