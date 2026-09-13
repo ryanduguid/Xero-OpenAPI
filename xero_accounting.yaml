@@ -13072,11 +13072,11 @@ paths:
                 Type: ValidationException
                 Message: A validation exception occurred
                 Elements:
-                - DateUTCString: "2019-03-14T00:15:35"
-                  DateUTC: /Date(1552522535440)/
-                  Details: Hello World
-                  ValidationErrors:
-                  - Message: The document with the supplied id was not found for this endpoint.
+                  - DateUTCString: "2019-03-14T00:15:35"
+                    DateUTC: /Date(1552522535440)/
+                    Details: Hello World
+                    ValidationErrors:
+                      - Message: The document with the supplied id was not found for this endpoint.
       requestBody:
         $ref: "#/components/requestBodies/historyRecords"
   /PurchaseOrders:

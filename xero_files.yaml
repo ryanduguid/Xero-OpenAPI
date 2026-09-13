@@ -74,32 +74,32 @@ paths:
                 Page: 1
                 PerPage: 2
                 Items:
-                - Name: helo-heros.jpg
-                  MimeType: application/jpg
-                  Size: 2878711
-                  CreatedDateUtc: "2021-02-10T16:02:54.9930000"
-                  UpdatedDateUtc: "2021-02-10T16:02:54.9930000"
-                  User:
-                    Name: sid.maestre@xero.com
-                    FirstName: Sidney
-                    LastName: Maestre
-                    FullName: Sidney Maestre
-                    Id: 740add2a-a703-4b8a-a670-1093919c2040
-                  FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
-                  Id: 3d413bfe-f40f-4807-b953-9a42f834ff15
-                - Name: helo-heros.jpg
-                  MimeType: application/jpg
-                  Size: 2878711
-                  CreatedDateUtc: "2021-02-09T21:16:00.6130000"
-                  UpdatedDateUtc: "2021-02-09T21:16:00.6130000"
-                  User:
-                    Name: sid.maestre@xero.com
-                    FirstName: Sidney
-                    LastName: Maestre
-                    FullName: Sidney Maestre
-                    Id: 740add2a-a703-4b8a-a670-1093919c2040
-                  FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
-                  Id: 22f87409-cdfd-4813-a868-559481bcb052
+                  - Name: helo-heros.jpg
+                    MimeType: application/jpg
+                    Size: 2878711
+                    CreatedDateUtc: "2021-02-10T16:02:54.9930000"
+                    UpdatedDateUtc: "2021-02-10T16:02:54.9930000"
+                    User:
+                      Name: sid.maestre@xero.com
+                      FirstName: Sidney
+                      LastName: Maestre
+                      FullName: Sidney Maestre
+                      Id: 740add2a-a703-4b8a-a670-1093919c2040
+                    FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                    Id: 3d413bfe-f40f-4807-b953-9a42f834ff15
+                  - Name: helo-heros.jpg
+                    MimeType: application/jpg
+                    Size: 2878711
+                    CreatedDateUtc: "2021-02-09T21:16:00.6130000"
+                    UpdatedDateUtc: "2021-02-09T21:16:00.6130000"
+                    User:
+                      Name: sid.maestre@xero.com
+                      FirstName: Sidney
+                      LastName: Maestre
+                      FullName: Sidney Maestre
+                      Id: 740add2a-a703-4b8a-a670-1093919c2040
+                    FolderId: bf924975-7097-46f2-a143-1ecfbab3c8c3
+                    Id: 22f87409-cdfd-4813-a868-559481bcb052
     post:
       security:
         - OAuth2:
