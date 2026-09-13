@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 versionNumber=${1:?Version number is required as first argument}
 branchName=${2:-master}

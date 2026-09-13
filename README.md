@@ -15,6 +15,8 @@ In Release (used for one or more SDKs)
 * [Payroll UK](https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-uk.yaml)
 * [Payroll NZ](https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-nz.yaml)
 * [Files](https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero_files.yaml)
+* [Finance](https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-finance.yaml)
+* [Payroll AU v2](https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/xero-payroll-au-v2.yaml)
 
 
 ## Contribution guide

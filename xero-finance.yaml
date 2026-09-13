@@ -74,7 +74,7 @@ paths:
                       earliestUnreconciledTransaction: "2019-03-01"
                       latestUnreconciledTransaction: "2021-03-01"
                       deletedAmount: 50
-                      totalAmount: 189
+                      totalAmount: 250
                       dataSource:
                         directBankFeed: 0
                         fileUpload: 300
@@ -265,8 +265,8 @@ paths:
                 endDate: "2019-06-30"
                 cashBalance:
                   openingCashBalance: 5000
-                  closingCashBalance: -50000
-                  netCashMovement: -55000
+                  closingCashBalance: -85000
+                  netCashMovement: -90000
                 cashflowActivities:
                   - name: Operating Activities
                     total: -41000
@@ -417,7 +417,7 @@ paths:
               example:
                 startDate: "2020-07-01"
                 endDate: "2021-06-30"
-                netProfitLoss: 123
+                netProfitLoss: 19640.4
                 revenue:
                   total: 20922.46
                   accountTypes:
@@ -512,14 +512,14 @@ paths:
                     balance:
                       value: 100
                       entryType: DEBIT
-                    signedBalance: -23
+                    signedBalance: 100
                     accountMovement:
                       debits: 0
-                      credits: 0
+                      credits: 123
                       movement:
                         value: 123
                         entryType: CREDIT
-                      signedMovement: 0
+                      signedMovement: -123
         "400":
           description: Bad Request
           content:
@@ -598,7 +598,7 @@ paths:
                   totalVoided: 150
                   totalCredited: 10
                 contacts:
-                  - id: 1f580fe2-0659-31ee-eeb4-5c49d15d8bfa
+                  - contactId: 1f580fe2-0659-31ee-eeb4-5c49d15d8bfa
                     name: FirstContact
                     total: 1400
                     totalDetail:
@@ -614,7 +614,7 @@ paths:
                       - "090"
                       - "200"
                       - 09-BANK
-                  - id: 20e94281-4751-fb7e-ee5e-96b43ae93c8a
+                  - contactId: 20e94281-4751-fb7e-ee5e-96b43ae93c8a
                     name: SecondContact
                     total: -200
                     totalDetail:
@@ -708,7 +708,7 @@ paths:
                   totalVoided: 150
                   totalCredited: 10
                 contacts:
-                  - id: 1f580fe2-0659-31ee-eeb4-5c49d15d8bfa
+                  - contactId: 1f580fe2-0659-31ee-eeb4-5c49d15d8bfa
                     name: FirstContact
                     total: 1400
                     totalDetail:
@@ -724,7 +724,7 @@ paths:
                       - "090"
                       - "200"
                       - 09-BANK
-                  - id: 20e94281-4751-fb7e-ee5e-96b43ae93c8a
+                  - contactId: 20e94281-4751-fb7e-ee5e-96b43ae93c8a
                     name: SecondContact
                     total: -200
                     totalDetail:
@@ -936,8 +936,8 @@ components:
             email: Grant read-only access to your email
             openid: Grant read-only access to your open id
             profile: your profile information
-            finance.statements.read: Grant read-only access to finacial statements
-            finance.cashvalidation.read: Grant read-only access to bank statement and reconcilation data
+            finance.statements.read: Grant read-only access to financial statements
+            finance.cashvalidation.read: Grant read-only access to bank statement and reconciliation data
             finance.bankstatementsplus.read: Grant read-only access to bank statements accounting data
   parameters:
     requiredHeader:

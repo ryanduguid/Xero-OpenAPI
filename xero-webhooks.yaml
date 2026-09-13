@@ -15,6 +15,8 @@ security: []
 webhooks:
   invoices:
     post:
+      parameters:
+        - $ref: "#/components/parameters/x-xero-signature"
       summary: Invoices Webhook Endpoint
       description: Invoice (Create, Update)
       operationId: publishInvoiceEvent
@@ -32,6 +34,8 @@ webhooks:
           $ref: "#/components/responses/401InvalidWebhookData"
   subscriptions:
     post:
+      parameters:
+        - $ref: "#/components/parameters/x-xero-signature"
       summary: Subscriptions Webhook Endpoint
       description: Subscription (Create, Update)
       operationId: publishSubscriptionEvent
@@ -49,6 +53,8 @@ webhooks:
           $ref: "#/components/responses/401InvalidWebhookData"
   contacts:
     post:
+      parameters:
+        - $ref: "#/components/parameters/x-xero-signature"
       summary: Contacts Webhook Endpoint
       description: Contact (Create, Update)
       operationId: publishContactEvent
@@ -66,6 +72,8 @@ webhooks:
           $ref: "#/components/responses/401InvalidWebhookData"
   creditNotes:
     post:
+      parameters:
+        - $ref: "#/components/parameters/x-xero-signature"
       summary: Credit Notes Webhook Endpoint
       description: Credit Note (Create, Update)
       operationId: publishCreditNoteEvent
@@ -101,6 +109,8 @@ webhooks:
           $ref: "#/components/responses/401InvalidWebhookData"
   prepayments:
     post:
+      parameters:
+        - $ref: "#/components/parameters/x-xero-signature"
       summary: Prepayments Webhook Endpoint
       description: Prepayment (Create, Update)
       operationId: publishPrepaymentEvent
@@ -137,6 +147,8 @@ webhooks:
           $ref: "#/components/responses/401InvalidWebhookData"
   overpayments:
     post:
+      parameters:
+        - $ref: "#/components/parameters/x-xero-signature"
       summary: Overpayments Webhook Endpoint
       description: Overpayment (Create, Update)
       operationId: publishOverpaymentEvent
@@ -172,12 +184,14 @@ webhooks:
         "401":
           $ref: "#/components/responses/401InvalidWebhookData"
 components:
-  headers:
+  parameters:
     x-xero-signature:
-      description: A hashed signature of the payload is passed along in the headers of each request as x-xero-signature
+      name: x-xero-signature
+      in: header
+      required: true
+      description: Base64 HMAC-SHA256 signature of the request payload
       schema:
         type: string
-      example: "<Base_64_HMAC_SHA_256>"
   schemas:
     WebhookEvent:
       required:
@@ -260,14 +274,14 @@ components:
           description: A list of events that have occurred
         lastEventSequence:
           type: integer
-          minimum: 1
+          minimum: 0
           maximum: 2147483647
-          description: The sequence number of the last event in the list
+          description: The sequence number of the last event in the list. The intent to receive validation payload has an empty event list and sends zero
         firstEventSequence:
           type: integer
-          minimum: 1
+          minimum: 0
           maximum: 2147483647
-          description: The sequence number of the first event in the list
+          description: The sequence number of the first event in the list. The intent to receive validation payload has an empty event list and sends zero
         entropy:
           type: string
           description: A random string used for security or validation purposes
@@ -444,23 +458,4 @@ components:
     401InvalidWebhookData:
       description: Return a 401 status to indicate that the webhook subscription failed
     200WebhookDataReceivedOk:
-      description: Return a 200 status to indicate that the webhook subscription succeeded
-      headers:
-        x-xero-signature:
-          $ref: "#/components/headers/x-xero-signature"
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/WebhookEvent"
-            example:
-              events:
-                - resourceUrl: https://api.xero.com/api.xro/2.0/Contacts/717f2bfc-c6d4-41fd-b238-3f2f0c0cf777
-                  resourceId: 717f2bfc-c6d4-41fd-b238-3f2f0c0cf777
-                  eventDateUtc: 2024-06-21T01:15:39.902
-                  eventType: UPDATE
-                  eventCategory: CONTACT
-                  tenantId: c2cc9b6e-9458-4c7d-93cc-f02b81b0594f
-                  tenantType: ORGANISATION
-              lastEventSequence: 1
-              firstEventSequence: 1
-              entropy: S0m3r4Nd0mt3xt
+      description: Return a 200 status to acknowledge receipt of a valid webhook

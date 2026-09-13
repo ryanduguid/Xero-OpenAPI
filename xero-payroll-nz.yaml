@@ -21,6 +21,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -267,6 +268,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -598,6 +600,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -717,7 +720,7 @@ paths:
           php: XeroAPI\XeroPHP\Models\PayrollNz\EmployeeTax\KiwiSaverContributionsEnum.MakeContributions
           node: EmployeeTax.KiwiSaverContributionsEnum.MakeContributions
           ruby: XeroRuby::PayrollNz::EmployeeTax::kiwi_saver_contributions_enum::MAKECONTRIBUTIONS
-          python: kiwi_saver_contributions_enum::MAKECONTRIBUTIONS
+          python: kiwi_saver_contributions_enum.MAKECONTRIBUTIONS
           java: com.xero.models.payrollnz.EmployeeTax.KiwiSaverContributionsEnum.MakeContributions
           csharp: EmployeeTax.KiwiSaverContributionsEnum.MakeContributions
           object: employeeTax
@@ -745,7 +748,7 @@ paths:
           php: XeroAPI\XeroPHP\Models\PayrollNz\TaxCode\MSL
           node: TaxCode.MSL
           ruby: XeroRuby::PayrollNz::TaxCode::MSL
-          python: tax_code:::MSL
+          python: tax_code.MSL
           java: com.xero.models.payrollnz.TaxCode.MSL
           csharp: TaxCode.MSL
           object: employeeTax
@@ -848,6 +851,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -1009,7 +1013,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EmployeeOpeningBalances"
-            example: '[{"periodEndDate":"2020-10-01","daysPaid":3,"unpaidWeeks":2,"grossEarnings":40.0}]'
+            example:
+              - periodEndDate: "2020-10-01"
+                daysPaid: 3
+                unpaidWeeks: 2
+                grossEarnings: 40.0
   /Employees/{EmployeeID}/Leave:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -1017,6 +1025,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -1401,6 +1410,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -1459,6 +1469,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -1489,7 +1500,7 @@ paths:
           schema:
             type: string
             format: date
-          example: Johnson
+          example: "2020-07-31"
       responses:
         "200":
           description: search results matching criteria
@@ -1676,6 +1687,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -1757,7 +1769,7 @@ paths:
           php: XeroAPI\XeroPHP\Models\PayrollNz\EmployeeLeaveType\ScheduleOfAccrualEnum.PercentageOfGrossEarnings
           node: EmployeeLeaveType.ScheduleOfAccrualEnum.PercentageOfGrossEarnings
           ruby: XeroRuby::PayrollNz::EmployeeLeaveType::schedule_of_accrual::PERCENTAGEOFGROSSEARNINGS
-          python: schedule_of_accrual::PERCENTAGEOFGROSSEARNINGS
+          python: schedule_of_accrual.PERCENTAGEOFGROSSEARNINGS
           java: com.xero.models.payrollnz.EmployeeLeaveType.ScheduleOfAccrualEnum.PercentageOfGrossEarnings
           csharp: EmployeeLeaveType.ScheduleOfAccrualEnum.PercentageOfGrossEarnings
           object: employeeLeaveType
@@ -1844,6 +1856,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -2021,6 +2034,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -2507,7 +2521,13 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EarningsTemplates"
-            example: '[{"ratePerUnit":20.0,"numberOfUnits":8.0,"earningsRateID":"f9d8f5b5-9049-47f4-8541-35e200f750a5"},{"ratePerUnit":0.0,"numberOfUnits":8.0,"earningsRateID":"65b83d94-f20f-45e1-85ae-387fcf460c26"}]'
+            example:
+              - ratePerUnit: 20.0
+                numberOfUnits: 8.0
+                earningsRateID: f9d8f5b5-9049-47f4-8541-35e200f750a5
+              - ratePerUnit: 0.0
+                numberOfUnits: 8.0
+                earningsRateID: 65b83d94-f20f-45e1-85ae-387fcf460c26
   /Deductions:
     parameters:
       - $ref: "#/components/parameters/requiredHeader"
@@ -2515,12 +2535,13 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
       operationId: getDeductions
       x-hasPayrollUkProblem: true
-      summary: Retrieves deductions for a specific employee
+      summary: Retrieves deductions
       parameters:
         - in: query
           name: page
@@ -2599,7 +2620,7 @@ paths:
           default: 00000000-0000-0000-0000-000000000000
           object: deduction
           is_last: true
-      summary: Creates a new deduction for a specific employee
+      summary: Creates a new deduction
       parameters:
         - $ref: "#/components/parameters/idempotencyKey"
       responses:
@@ -2646,6 +2667,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -2689,6 +2711,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -2736,6 +2759,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -2776,6 +2800,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -2940,7 +2965,7 @@ paths:
               category: Other
               liabilityAccountId: 568f2e9a-0870-46cc-8678-f83f132ed4e3
               expenseAccountId: e4eb36f6-97e3-4427-a394-dd4e1b355c2e
-              CalculationTypeNZ: FixedAmount
+              calculationTypeNZ: FixedAmount
               standardAmount: 10
   /Superannuations/{SuperannuationID}:
     parameters:
@@ -2949,6 +2974,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -2995,6 +3021,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -3157,6 +3184,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -3204,6 +3232,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -3343,6 +3372,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -3388,6 +3418,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -3534,6 +3565,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -3580,6 +3612,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollNz
@@ -3795,6 +3828,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollNz
@@ -3872,7 +3906,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TimesheetLine"
+                $ref: "#/components/schemas/TimesheetLineObject"
               example:
                 id: 00000000-0000-0000-0000-000000000000
                 providerName: provider-name
@@ -4303,7 +4337,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TimesheetLine"
+                $ref: "#/components/schemas/TimesheetLineObject"
               example:
                 id: 00000000-0000-0000-0000-000000000000
                 providerName: provider-name
@@ -4324,6 +4358,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -4494,6 +4529,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -4538,6 +4574,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -4722,6 +4759,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -4742,7 +4780,7 @@ paths:
           x-snake: salary_and_wages_id
           in: path
           required: true
-          description: Id for single pay template earnings object
+          description: Id for single salary and wages object
           schema:
             type: string
             format: uuid
@@ -4753,7 +4791,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SalaryAndWages"
+                $ref: "#/components/schemas/SalaryAndWageObject"
               example:
                 id: 00000000-0000-0000-0000-000000000000
                 providerName: provider-name
@@ -4761,18 +4799,18 @@ paths:
                 httpStatusCode: OK
                 pagination: null
                 problem: null
-                salaryAndWages:
-                  - salaryAndWagesID: b0026f5a-fa8e-43aa-95e4-cec3c0972e39
-                    earningsRateID: f9d8f5b5-9049-47f4-8541-35e200f750a5
-                    numberOfUnitsPerWeek: 0
-                    ratePerUnit: 25
-                    numberOfUnitsPerDay: 0
-                    daysPerWeek: 0
-                    effectiveFrom: 2019-02-07T00:00:00
-                    annualSalary: 25
-                    status: Active
-                    paymentType: Hourly
-                    workPatternType: DaysAndHours
+                salaryAndWage:
+                  salaryAndWagesID: b0026f5a-fa8e-43aa-95e4-cec3c0972e39
+                  earningsRateID: f9d8f5b5-9049-47f4-8541-35e200f750a5
+                  numberOfUnitsPerWeek: 0
+                  ratePerUnit: 25
+                  numberOfUnitsPerDay: 0
+                  daysPerWeek: 0
+                  effectiveFrom: 2019-02-07T00:00:00
+                  annualSalary: 25
+                  status: Active
+                  paymentType: Hourly
+                  workPatternType: DaysAndHours
     put:
       security:
         - OAuth2:
@@ -4838,7 +4876,7 @@ paths:
           x-snake: salary_and_wages_id
           in: path
           required: true
-          description: Id for single pay template earnings object
+          description: Id for single salary and wages object
           schema:
             type: string
             format: uuid
@@ -4939,6 +4977,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payruns
+        - OAuth2:
             - payroll.payruns.read
       tags:
         - PayrollNz
@@ -4953,7 +4992,7 @@ paths:
             type: integer
         - in: query
           name: status
-          description: By default get payruns will return all the payruns for an organization. You can add GET https://api.xero.com/payroll.xro/2.0/payRuns?statu={PayRunStatus} to filter the payruns by status.
+          description: By default get payruns will return all the payruns for an organization. You can add GET https://api.xero.com/payroll.xro/2.0/payRuns?status={PayRunStatus} to filter the payruns by status.
           schema:
             type: string
             enum:
@@ -5116,6 +5155,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payruns
+        - OAuth2:
             - payroll.payruns.read
       tags:
         - PayrollNz
@@ -5183,6 +5223,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payslip
+        - OAuth2:
             - payroll.payslip.read
       tags:
         - PayrollNz
@@ -5290,13 +5331,13 @@ paths:
                       - taxLineID: 1d7c6670-c227-4de9-a7fc-fbf7ec16a804
                         description: null
                         amount: 19.26
-                        globalTaxTypeID: 11
+                        globalTaxTypeID: "11"
                         manualAdjustment: false
                     employerTaxLines:
                       - taxLineID: b790f489-9bbf-4979-a987-53dddf8b648f
                         description: null
                         amount: 0.7
-                        globalTaxTypeID: 10
+                        globalTaxTypeID: "10"
                         manualAdjustment: false
                     statutoryDeductionLines:
                       - statutoryDeductionTypeID: b5efd8d1-0c93-4a14-a314-b5cba4a4e6b3
@@ -5320,6 +5361,7 @@ paths:
       security:
         - OAuth2:
             - payroll.payslip
+        - OAuth2:
             - payroll.payslip.read
       tags:
         - PayrollNz
@@ -5418,13 +5460,13 @@ paths:
                     - taxLineID: 1d7c6670-c227-4de9-a7fc-fbf7ec16a804
                       description: null
                       amount: 19.26
-                      globalTaxTypeID: 11
+                      globalTaxTypeID: "11"
                       manualAdjustment: false
                   employerTaxLines:
                     - taxLineID: b790f489-9bbf-4979-a987-53dddf8b648f
                       description: null
                       amount: 0.7
-                      globalTaxTypeID: 10
+                      globalTaxTypeID: "10"
                       manualAdjustment: false
                   statutoryDeductionLines:
                     - statutoryDeductionTypeID: b5efd8d1-0c93-4a14-a314-b5cba4a4e6b3
@@ -5533,7 +5575,7 @@ paths:
           python: earnings_lines
           ruby: earnings_lines
           object: paySlip
-      summary: Creates an employee pay slip
+      summary: Updates an employee pay slip
       parameters:
         - $ref: "#/components/parameters/idempotencyKey"
         - in: path
@@ -5592,8 +5634,8 @@ paths:
                       displayName: Salary
                       ratePerUnit: 0
                       numberOfUnits: 8
-                      fixedAmount: null
-                      amount: 0
+                      fixedAmount: 3360
+                      amount: 3360
                       isLinkedToTimesheet: false
                       isAverageDailyPayRate: null
                       isSystemGenerated: false
@@ -5647,13 +5689,13 @@ paths:
                     - taxLineID: 2faf8f5d-6446-4bea-a2cd-d5cd7e8b9384
                       description: null
                       amount: 1057.22
-                      globalTaxTypeID: 11
+                      globalTaxTypeID: "11"
                       manualAdjustment: false
                   employerTaxLines:
                     - taxLineID: caa8d4fa-0949-460d-90f5-f43ec9f3db12
                       description: null
                       amount: 18.9
-                      globalTaxTypeID: 10
+                      globalTaxTypeID: "10"
                       manualAdjustment: false
                   statutoryDeductionLines:
                     - statutoryDeductionTypeID: b5efd8d1-0c93-4a14-a314-b5cba4a4e6b3
@@ -5750,6 +5792,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -5795,6 +5838,7 @@ paths:
       security:
         - OAuth2:
             - payroll.settings
+        - OAuth2:
             - payroll.settings.read
       tags:
         - PayrollNz
@@ -5825,6 +5869,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -6008,6 +6053,7 @@ paths:
       security:
         - OAuth2:
             - payroll.employees
+        - OAuth2:
             - payroll.employees.read
       tags:
         - PayrollNz
@@ -6173,7 +6219,7 @@ components:
         status:
           description: The error status code
           type: string
-          example: 400
+          example: "400"
         detail:
           description: A description of the error
           type: string
@@ -6357,7 +6403,7 @@ components:
         irdNumber:
           description: The IRD Number.
           type: string
-          example: 111111111
+          example: "111111111"
         taxCode:
           $ref: "#/components/schemas/TaxCode"
         specialTaxRatePercentage:
@@ -6531,7 +6577,7 @@ components:
         - endDate
       properties:
         leaveID:
-          description: The Xero identifier for LeaveType
+          description: The Xero identifier for the employee leave record
           type: string
           format: uuid
         leaveTypeID:
@@ -6870,13 +6916,13 @@ components:
           format: double
           x-is-money: true
           example: 10.0
-        SickLeaveToAccrueAnnually:
+        sickLeaveToAccrueAnnually:
           description: Number of units accrued annually for sick leave. The type of units is determined by the property "TypeOfUnitsToAccrue" on the "Sick Leave" leave type
           type: number
           format: double
           x-is-money: true
           example: 100.5
-        SickLeaveMaximumToAccrue:
+        sickLeaveMaximumToAccrue:
           description: Maximum number of units accrued annually for sick leave. The type of units is determined by the property "TypeOfUnitsToAccrue" on the "Sick Leave" leave type
           type: number
           format: double
@@ -6888,21 +6934,23 @@ components:
           format: double
           x-is-money: true
           example: 10.5
-        SickLeaveScheduleOfAccrual:
+        sickLeaveScheduleOfAccrual:
           description: Set Schedule of Accrual Type for Sick Leave
           type: string
           example: OnAnniversaryDate
-        SickLeaveAnniversaryDate:
+        sickLeaveAnniversaryDate:
           description: If Sick Leave Schedule of Accrual is "OnAnniversaryDate", this is the date when entitled to Sick Leave. When null the Employee's start date is used as the anniversary date
           type: string
           format: date
           example: 2020-01-19
+          nullable: true
           x-is-date: true
-        AnnualLeaveAnniversaryDate:
+        annualLeaveAnniversaryDate:
           description: The first date the employee will accrue Annual Leave. When null the Employee's start date is used as the anniversary date
           type: string
           format: date
           example: 2020-01-19
+          nullable: true
           x-is-date: true
     EmployeeLeaveTypeObject:
       type: object
@@ -7042,7 +7090,7 @@ components:
           format: double
           x-is-money: true
         numberOfUnits:
-          description: The rate per unit
+          description: The number of units
           type: number
           format: double
           x-is-money: true
@@ -7900,7 +7948,7 @@ components:
         lastEdited:
           description: The date payslip was last updated
           type: string
-          format: date
+          format: date-time
           x-is-datetime: true
         firstName:
           description: Employee first name
@@ -8095,24 +8143,24 @@ components:
           type: string
           format: uuid
         earningsRateID:
-          description: Xero identifier for payroll leave earnings rate
+          description: Xero identifier for payroll earnings rate
           type: string
           format: uuid
         displayName:
           description: name of earnings rate for display in UI
           type: string
         ratePerUnit:
-          description: Rate per unit for leave earnings line
+          description: Rate per unit for the timesheet earnings line
           type: number
           format: double
           x-is-money: true
         numberOfUnits:
-          description: Leave earnings number of units
+          description: Number of units for the timesheet earnings line
           type: number
           format: double
           x-is-money: true
         fixedAmount:
-          description: Leave earnings fixed amount. Only applicable if the EarningsRate RateType is Fixed
+          description: Fixed amount for the timesheet earnings line. Only applicable if the EarningsRate RateType is Fixed
           type: number
           format: double
           x-is-money: true
@@ -8122,7 +8170,7 @@ components:
           format: double
           x-is-money: true
         isLinkedToTimesheet:
-          description: Identifies if the leave earnings is taken from the timesheet. False for leave earnings line
+          description: Identifies if the earnings line is taken from the timesheet. True for a timesheet earnings line
           type: boolean
         isAverageDailyPayRate:
           description: Identifies if the earnings is using an average daily pay rate
@@ -8142,7 +8190,7 @@ components:
           type: string
           format: uuid
         displayName:
-          description: name of earnings rate for display in UI
+          description: name of the deduction type for display in UI
           type: string
         amount:
           description: The amount of the deduction line
@@ -8177,12 +8225,12 @@ components:
           format: double
           x-is-money: true
         ratePerUnit:
-          description: Rate per unit for leave earnings line
+          description: Rate per unit for the reimbursement line
           type: number
           format: double
           x-is-money: true
         numberOfUnits:
-          description: Leave earnings number of units
+          description: Number of units for the reimbursement line
           type: number
           format: double
           x-is-money: true
@@ -8398,7 +8446,7 @@ components:
           type: string
           example: Apt 4
         city:
-          description: Suburb for employee home address
+          description: City or town for employee home address
           type: string
           example: Wellington
         suburb:
@@ -8408,7 +8456,7 @@ components:
         postCode:
           description: PostCode for employee home address
           type: string
-          example: 6011
+          example: "6011"
         countryName:
           description: Country of HomeAddress
           type: string
@@ -8521,6 +8569,8 @@ components:
           x-is-money: true
     WorkingWeeks:
       type: array
+      minItems: 1
+      maxItems: 1
       items:
         $ref: "#/components/schemas/WorkingWeek"
     EmployeeWorkingPattern:

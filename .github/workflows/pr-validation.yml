@@ -37,29 +37,24 @@ jobs:
           BRANCH_NAME="${{ github.event.pull_request.head.sha }}"
           OAS_REPO="${{ github.event.pull_request.head.repo.full_name }}"
 
-          # Trigger the workflow and capture the response
-          gh workflow run pr.yml \
+          # Capture the run created by this dispatch, including under concurrent PRs.
+          RUN_URL=$(gh workflow run pr.yml \
             --repo xero-internal/xeroapi-sdk-codegen \
             --ref master \
             --field oas_branch="$BRANCH_NAME" \
-            --field oas_repo="$OAS_REPO"
-
-          # Wait a moment for the run to be created
-          sleep 5
-
-          # Get the latest run ID for the workflow
-          RUN_ID=$(gh run list \
-            --repo xero-internal/xeroapi-sdk-codegen \
-            --workflow=pr.yml \
-            --limit 1 \
-            --json databaseId \
-            --jq '.[0].databaseId')
+            --field oas_repo="$OAS_REPO")
+          if [[ "$RUN_URL" =~ https://github.com/xero-internal/xeroapi-sdk-codegen/actions/runs/([0-9]+) ]]; then
+            RUN_ID="${BASH_REMATCH[1]}"
+          else
+            echo "Workflow dispatch did not return a run URL." >&2
+            exit 1
+          fi
 
           echo "run_id=$RUN_ID" >> $GITHUB_OUTPUT
           echo "Triggered workflow run ID: $RUN_ID"
 
       - name: Check status of codegen validation workflow
-        uses: Codex-/await-remote-run@v1.13.0
+        uses: Codex-/await-remote-run@a56c556e6434d2d7ec9438dc656143b39532324e # v1.13.0
         with:
           token: ${{ steps.get_access_token.outputs.token }}
           repo: xeroapi-sdk-codegen

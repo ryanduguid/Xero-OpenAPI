@@ -25,6 +25,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollAuV2
@@ -242,6 +243,7 @@ paths:
       security:
         - OAuth2:
             - payroll.timesheets
+        - OAuth2:
             - payroll.timesheets.read
       tags:
         - PayrollAuV2
@@ -793,7 +795,8 @@ components:
           example: BadRequest
         status:
           description: The error status code
-          type: string
+          type: integer
+          format: int32
           example: 400
         detail:
           description: A description of the error

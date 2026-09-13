@@ -36,7 +36,7 @@ detect_breaking_commit_marker() {
         return 0
     fi
 
-    if echo "$commits" | grep -Eiq 'BREAKING[ -]CHANGE:'; then
+    if echo "$commits" | grep -Eq '^BREAKING[ -]CHANGE:'; then
         return 0
     fi
 
@@ -102,7 +102,13 @@ if [ ! -f "xero_accounting.yaml" ]; then
 fi
 
 # Fetch master if not already done
-git fetch "${BASE_BRANCH%%/*}" "${BASE_BRANCH##*/}" 2>/dev/null || echo "Warning: Could not fetch ${BASE_BRANCH}"
+git fetch "${BASE_BRANCH%%/*}" "${BASE_BRANCH#*/}" 2>/dev/null || echo "Warning: Could not fetch ${BASE_BRANCH}"
+
+# The comparison is meaningless without the base revision, so establish it before any file is read.
+if ! git rev-parse --verify --quiet "${BASE_BRANCH}^{commit}" >/dev/null 2>&1; then
+    echo "Error: base revision '${BASE_BRANCH}' is unavailable, so no API comparison was made" >&2
+    exit 2
+fi
 
 # Create temp directory for master branch files (outside repo to avoid overlap with /current mount)
 TEMP_DIR=$(mktemp -d)
@@ -142,16 +148,22 @@ for file in $files; do
     echo ""
     echo "========== $file =========="
 
-    # Get the file from master branch
-    if ! git show "$BASE_BRANCH:$file" > "$TEMP_DIR/$file" 2>/dev/null; then
-        echo "ℹ️  New file (does not exist in master branch)"
+    # Get the file from the base revision. A path that is absent there is a new file;
+    # any other read failure is a comparison failure and must not be reported as success.
+    if ! git cat-file -e "$BASE_BRANCH:$file" 2>/dev/null; then
+        echo "ℹ️  New file (does not exist in ${BASE_BRANCH})"
         continue
+    fi
+
+    if ! git show "$BASE_BRANCH:$file" > "$TEMP_DIR/$file" 2>/dev/null; then
+        echo "Error: could not read $file from ${BASE_BRANCH}, so no comparison was made" >&2
+        exit 2
     fi
 
     # Verify the temp file was created
     if [ ! -f "$TEMP_DIR/$file" ]; then
-        echo "❌ Failed to create temp file"
-        continue
+        echo "Error: failed to create temp file for $file" >&2
+        exit 2
     fi
 
     # Note: oasdiff has some non-deterministic behavior in change counts due to
@@ -185,10 +197,13 @@ for file in $files; do
 
     if [ $BREAKING_EXIT -eq 0 ]; then
         echo "✓ No breaking changes detected"
-    else
+    elif [ $BREAKING_EXIT -eq 1 ]; then
         echo "⚠ Breaking changes detected (exit code: $BREAKING_EXIT)"
         BREAKING_CHANGES_FOUND=true
         FILES_WITH_BREAKING_CHANGES+=("$file")
+    else
+        echo "API comparison failed for $file (exit code: $BREAKING_EXIT)" >&2
+        exit "$BREAKING_EXIT"
     fi
 
     PROCESSED_FILES=$((PROCESSED_FILES + 1))
