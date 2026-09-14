@@ -31,6 +31,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Subscription"
               example:
+                # Illustrative subscription; item statuses and start dates are sample values.
                 currentPeriodEnd: 2021-07-20T03:13:48
                 endDate: 2021-07-20T03:13:48
                 id: 01b5a6f4-8936-4bfa-b703-830702312b87
@@ -43,6 +44,7 @@ paths:
                     subscriptionItems:
                       - endDate: 2021-07-20T03:13:48
                         id: c7336bf6-8a47-4f13-9fc0-82420e6922c8
+                        status: ACTIVE
                         testMode: true
                         price:
                           amount: 50
@@ -56,6 +58,8 @@ paths:
                         startDate: 2021-07-20T03:13:48
                       - endDate: 2021-07-20T03:13:48
                         id: 1a25bc96-141a-4e42-a0fa-55ed51844da4
+                        status: ACTIVE
+                        startDate: 2021-07-20T03:13:48
                         testMode: true
                         price:
                           amount: 0.20
