@@ -1128,7 +1128,7 @@ components:
       properties:
         value:
           type: number
-          description: Total closing balance of the account. This includes both reconciled and unreconciled bank statement lines. The closing balance will always be represented as a positive number, with it’s debit/credit status defined in the statementBalanceDebitCredit field.
+          description: Total closing balance of the account. This includes both reconciled and unreconciled bank statement lines. The closing balance will always be represented as a positive number, with its debit/credit status defined in the type field.
           format: double
           x-is-money: true
         type:
@@ -1753,7 +1753,7 @@ components:
           $ref: "#/components/schemas/ContactResponse"
         total:
           type: number
-          description: Total of Invoice tax inclusive (i.e. SubTotal + TotalTax); Not included in summary mode
+          description: Tax-inclusive total of the credit note (SubTotal + TotalTax). Omitted in summary mode
           format: double
           x-is-money: true
         lineItems:
@@ -1812,7 +1812,7 @@ components:
           $ref: "#/components/schemas/ContactResponse"
         total:
           type: number
-          description: Total of Invoice tax inclusive (i.e. SubTotal + TotalTax); Not included in summary mode
+          description: Tax-inclusive total of the overpayment (SubTotal + TotalTax). Omitted in summary mode
           format: double
           x-is-money: true
         lineItems:
@@ -1870,7 +1870,7 @@ components:
           $ref: "#/components/schemas/ContactResponse"
         total:
           type: number
-          description: Total of Invoice tax inclusive (i.e. SubTotal + TotalTax); Not included in summary mode
+          description: Tax-inclusive total of the prepayment (SubTotal + TotalTax). Omitted in summary mode
           format: double
           x-is-money: true
         lineItems:

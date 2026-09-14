@@ -7,8 +7,12 @@ branchName=${2:-master}
 git checkout "$branchName"
 
 for file in xero*.yaml; do
-    yq -i ".info.version = \"$versionNumber\"" -i "$file"
+    XERO_RELEASE_VERSION="$versionNumber" yq -i '.info.version = strenv(XERO_RELEASE_VERSION)' "$file"
     echo "updated version in $file to $versionNumber"
+done
+
+for file in xero*.yaml; do
+    XERO_RELEASE_VERSION="$versionNumber" yq -e '.info.version == strenv(XERO_RELEASE_VERSION)' "$file" > /dev/null
 done
 
 git add xero*.yaml

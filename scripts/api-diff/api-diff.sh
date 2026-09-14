@@ -11,7 +11,7 @@ set -o pipefail  # Catch errors in pipes
 cd "$(dirname "$0")/../.."
 
 # Configuration
-DOCKER_IMAGE="${OASDIFF_DOCKER_IMAGE:-tufin/oasdiff:latest}"
+DOCKER_IMAGE="${OASDIFF_DOCKER_IMAGE:-tufin/oasdiff:v1.31.0}"
 
 # Detect base branch from GitHub Actions environment or fallback to local defaults
 if [ -n "$GITHUB_BASE_REF" ]; then

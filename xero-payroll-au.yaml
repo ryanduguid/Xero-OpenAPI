@@ -4255,7 +4255,7 @@ components:
           type: string
           example: MLC Navigator Retirement Plan - Superannuation Service (including Series 2) (MLC Superannuation Fund)
         ABN:
-          description: ABN of the self managed super fund
+          description: ABN of the regulated or self-managed super fund
           type: string
           example: "40022701955"
         BSB:
@@ -4654,7 +4654,7 @@ components:
           format: int
           example: 75
         HasStudentStartupLoan:
-          description: If the employee is eligible for student startup loan rules
+          description: Whether the employee has a student startup loan
           type: boolean
           example: true
         HasLoanOrStudentDebt:

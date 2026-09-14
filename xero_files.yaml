@@ -527,7 +527,7 @@ paths:
               - CreatedDateUtc
               - AssociationDateUtc
             default: CreatedDateUtc
-            example: Associations/{ObjectId}?sort=CreatedDateUtc
+            example: CreatedDateUtc
         - in: query
           name: direction
           description: direction to sort by
@@ -536,7 +536,7 @@ paths:
             enum:
               - ASC
               - DESC
-            example: Associations/{ObjectId}?sort=CreatedDateUtc&direction=DESC
+            example: DESC
       responses:
         "200":
           description: search results matching criteria
@@ -616,7 +616,7 @@ paths:
               - Name
               - Size
               - CreatedDateUTC
-            example: CreatedDateUTC DESC
+            example: CreatedDateUTC
       responses:
         "200":
           description: search results matching criteria

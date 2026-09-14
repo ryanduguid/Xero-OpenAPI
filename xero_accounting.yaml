@@ -20565,6 +20565,8 @@ components:
           properties:
             LineItems:
               type: array
+              items:
+                $ref: "#/components/schemas/LineItem"
               minItems: 1
     InvoicesCreate:
       type: object
@@ -20679,6 +20681,8 @@ components:
                     - ContactNumber
             LineItems:
               type: array
+              items:
+                $ref: "#/components/schemas/LineItem"
               minItems: 1
     PurchaseOrdersCreate:
       type: object
@@ -20755,6 +20759,8 @@ components:
                 - AUTHORISED
             LineItems:
               type: array
+              items:
+                $ref: "#/components/schemas/LineItem"
               minItems: 1
     RepeatingInvoicesCreate:
       type: object
