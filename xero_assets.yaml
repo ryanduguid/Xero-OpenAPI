@@ -67,7 +67,7 @@ paths:
         - name: sortDirection
           x-snake: sort_direction
           in: query
-          description: ASC or DESC
+          description: asc or desc
           schema:
             type: string
             enum:

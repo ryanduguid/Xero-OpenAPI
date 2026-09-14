@@ -7,10 +7,9 @@
     [
       "@semantic-release/release-notes-generator",
       {
-        "preset": "angular",
+        "preset": "conventionalcommits",
         "writerOpts": {
-          "headerPartial": "## What's changed",
-          "footerPartial": "\n**Full Changelog**: {{~@root.host}}/{{~@root.owner}}/{{~@root.repository}}/compare/{{previousTag}}...{{version}}"
+          "headerPartial": "## What's changed"
         }
       }
     ],
