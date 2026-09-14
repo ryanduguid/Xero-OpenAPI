@@ -23,7 +23,7 @@ Main script that compares OpenAPI specifications against the master branch.
 ```
 
 **Environment Variables:**
-- `OASDIFF_DOCKER_IMAGE` - Docker image to use (default: `tufin/oasdiff:latest`)
+- `OASDIFF_DOCKER_IMAGE` - Docker image to use (default: `tufin/oasdiff:v1.31.0`)
 - `BASE_BRANCH` - Branch to compare against (default: `origin/master`)
 
 ### `api-diff.test.sh`
@@ -62,6 +62,13 @@ The API diff script automatically adjusts behavior based on commit messages:
 This keeps enforcement aligned with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) and semantic-release expectations.
 
 ## Known Limitations
+
+The default image is pinned to v1.31.0. On 14 September 2026, the floating
+`latest` image stalled on `xero_accounting.yaml`; the official v1.32.0 binary
+also timed out when comparing the unchanged base with itself. Version 1.31.0
+completed the actual changelog and breaking-change comparisons in under a
+second each. Recheck that schema before updating the pin. The compared files,
+warning threshold and failure handling remain unchanged.
 
 The oasdiff tool has some non-deterministic behavior due to unordered map iteration in Go:
 - **Error counts** (breaking changes) are consistent and reliable
