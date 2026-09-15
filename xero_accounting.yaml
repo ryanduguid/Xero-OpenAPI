@@ -22121,9 +22121,8 @@ components:
           description: ACCRECCREDIT only – additional reference number
           type: string
         SentToContact:
-          description: Whether the credit note is marked as sent in Xero. Set this only for an Awaiting Payment or Paid credit note. False marks it unsent; null leaves it unchanged.
+          description: Whether the credit note is marked as sent in Xero. Set this only for an Awaiting Payment or Paid credit note. False marks it unsent.
           type: boolean
-          nullable: true
         CurrencyRate:
           description: The currency rate for a multicurrency invoice. If no rate is specified, the XE.com day rate is used
           type: number
