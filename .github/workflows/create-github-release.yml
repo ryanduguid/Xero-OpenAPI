@@ -32,6 +32,6 @@ jobs:
 
       - name: Perform release
         # Preset 9 works with the release-notes generator's writer 8.
-        run: npx --package @semantic-release/exec --package conventional-changelog-conventionalcommits@9.3.1 semantic-release
+        run: npx --ignore-scripts --package @semantic-release/exec --package conventional-changelog-conventionalcommits@9.3.1 semantic-release
         env:
           GH_TOKEN: ${{ steps.get_access_token.outputs.token }}
