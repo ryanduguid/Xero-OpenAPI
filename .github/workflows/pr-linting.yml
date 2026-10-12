@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: MegaLinter
-        uses: oxsecurity/megalinter/flavors/documentation@v9
+        uses: oxsecurity/megalinter/flavors/documentation@ef3e84b8b836d76db562d0f3ed7da61e8fd538bc # v9
 
   commitlint:
     runs-on: ubuntu-latest
