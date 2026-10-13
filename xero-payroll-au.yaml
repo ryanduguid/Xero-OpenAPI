@@ -4532,7 +4532,6 @@ components:
           description: Boolean to determine if the leave type is considered as qualifying earnings for superannuation guarantee calculations
           type: boolean
           example: true
-          readOnly: true
     ReimbursementType:
       type: object
       properties:
@@ -4906,9 +4905,8 @@ components:
           type: boolean
           example: true
         IsQualifyingEarnings:
-          description: Boolean to determine if the leave line is considered as qualifying earnings for superannuation guarantee calculations. Defaults to false when omitted
+          description: Boolean to determine if the leave line is considered as qualifying earnings for superannuation guarantee calculations
           type: boolean
-          default: false
           example: true
         NumberOfUnits:
           description: Number of units for leave line.
