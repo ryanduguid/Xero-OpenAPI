@@ -1,9 +1,13 @@
 # Xero-OpenAPI
 An OpenAPI (Swagger) specification for the Xero API with OAuth 2.0 security schema.
 
+<div align="center">
+
 **Fork status**
 
 [![Fork code quality](https://img.shields.io/codacy/grade/1bfdbd5839074a7aa4ccc27864b9a9e7/master?style=flat&labelColor=000000)](https://app.codacy.com/gh/ryanduguid/Xero-OpenAPI/dashboard)
+
+</div>
 
 ## Description
 This repository holds the official Xero [OpenAPI](https://www.openapis.org/) descriptions.
