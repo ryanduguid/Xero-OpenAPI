@@ -3,12 +3,20 @@
       "path": "/xero_accounting.yaml",
       "canPreview": true
     },
+    "accountData": {
+      "path": "/xero-accountdata.yaml",
+      "canPreview": false
+    },
     "assets": {
       "path": "/xero_assets.yaml",
       "canPreview": true
     },
     "bankfeeds": {
       "path": "/xero_bankfeeds.yaml",
+      "canPreview": false
+    },
+    "bankfeedsV2": {
+      "path": "/xero_bankfeeds_v2.yaml",
       "canPreview": false
     },
     "files": {
