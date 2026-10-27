@@ -8298,7 +8298,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InvoicesCreate"
+              $ref: "#/components/schemas/Invoices"
             example:
               Invoices:
                 - Type: ACCREC
@@ -13730,7 +13730,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PurchaseOrdersCreate"
+              $ref: "#/components/schemas/PurchaseOrders"
             example:
               PurchaseOrders:
                 - Contact:
@@ -16519,7 +16519,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RepeatingInvoicesCreate"
+              $ref: "#/components/schemas/RepeatingInvoices"
             example:
               RepeatingInvoices:
                 - Schedule:
