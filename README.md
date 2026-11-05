@@ -9,6 +9,8 @@ An OpenAPI (Swagger) specification for the Xero API with OAuth 2.0 security sche
 
 </div>
 
+ryanduguid/Xero-OpenAPI is [Ryan Duguid](https://duguid.com.au/)'s fork of [XeroAPI/Xero-OpenAPI](https://github.com/XeroAPI/Xero-OpenAPI), adding OpenAPI contract, example and schema corrections, including a breaking change to batch upsert semantics, for Xero SDK and API client authors who need those changes.
+
 ## Description
 This repository holds the official Xero [OpenAPI](https://www.openapis.org/) descriptions.
 
